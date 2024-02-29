@@ -1,0 +1,17 @@
+{
+    "mode": "server",
+    "port": 6002,
+    "appManager.array.apps": [
+        {
+            "id": "local-bankrs-id",
+            "key": "local-bankrs-key",
+            "secret": "local-bankrs-secret"
+        },
+        {
+            "id": "staging-bankrs-id",
+            "key": "staging-bankrs-key",
+            "secret": "staging-bankrs-secret"
+        }   
+    ],
+    "debug": false
+}
