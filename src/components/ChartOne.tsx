@@ -45,6 +45,7 @@ const ChartOne: React.FC = () => {
   }, []);
 
   useEffect(() => {
+
     const getBankAccounts = async () => {
       try {
         const res = await axios.get(`bank_accounts?page=${currentPage}`);
@@ -61,6 +62,7 @@ const ChartOne: React.FC = () => {
     };
 
     getBankAccounts();
+
   }, [currentPage]);
 
   const onChange = async (value: string) => {
@@ -70,6 +72,7 @@ const ChartOne: React.FC = () => {
     const res = await axios.get(`bank-account-activity/${value}`);
 
     setRecord(res.data);
+    
     //Data
     dispatch(
       updateSeries({
