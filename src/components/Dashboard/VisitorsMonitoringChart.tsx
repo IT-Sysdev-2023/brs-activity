@@ -1,7 +1,6 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import dayjs from 'dayjs';
 
 interface ChartFourState {
   series: { data: number[]; name: any }[];
@@ -9,13 +8,18 @@ interface ChartFourState {
 interface TypeProps {
   countUser: number[];
   dayOfTheMonth: number[];
+  month: string;
 }
 
-const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
+const VisitorsChart: React.FC<TypeProps> = ({
+  countUser,
+  dayOfTheMonth,
+  month,
+}) => {
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
-        name: 'today',
+        name: 'asdsa',
         data: dayOfTheMonth,
       },
     ],
@@ -86,15 +90,15 @@ const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
-      series: [{ ...prevState.series[0], data: countUser }],
+      series: [{ name: month, data: countUser }],
     }));
-  }, [countUser]);
+  }, [countUser, month]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
       <div>
         <h3 className="text-xl font-semibold text-black dark:text-white">
-          Visitors Analytics
+          {month + ' Analytics'}
         </h3>
       </div>
 
