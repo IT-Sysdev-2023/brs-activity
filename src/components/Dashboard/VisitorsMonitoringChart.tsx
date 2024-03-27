@@ -1,9 +1,10 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import dayjs from 'dayjs';
 
 interface ChartFourState {
-  series: { data: number[] }[];
+  series: { data: number[]; name: any }[];
 }
 interface TypeProps {
   countUser: number[];
@@ -14,6 +15,7 @@ const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
+        name: 'today',
         data: dayOfTheMonth,
       },
     ],
@@ -33,7 +35,6 @@ const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
       bar: {
         horizontal: false,
         columnWidth: '55%',
-        // endingShape: "rounded",
         borderRadius: 2,
       },
     },
@@ -64,9 +65,6 @@ const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
         radius: 99,
       },
     },
-    // yaxis: {
-    //   title: false,
-    // },
     grid: {
       yaxis: {
         lines: {
@@ -82,21 +80,16 @@ const VisitorsChart: React.FC<TypeProps> = ({ countUser, dayOfTheMonth }) => {
       x: {
         show: false,
       },
-      // y: {
-      //   formatter: function (val) {
-      //     return val;
-      //   },
-      // },
     },
   };
 
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
-      series: [{ data: countUser }],
+      series: [{ ...prevState.series[0], data: countUser }],
     }));
   }, [countUser]);
-  
+
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
       <div>
