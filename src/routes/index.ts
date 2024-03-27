@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
 const VisitorMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/VisitorsMonitoring'));
+const UserMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/UserMonitoring'));
 const Chart = lazy(() => import('../pages/Chart'));
 const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const FormLayout = lazy(() => import('../pages/Form/FormLayout'));
@@ -21,6 +22,11 @@ const coreRoutes = [
     path: '/visitors',
     title: 'Visitors Monitoring',
     component: VisitorMonitoring,
+  },
+  {
+    path: '/user-monitoring',
+    title: 'User Monitoring',
+    component: UserMonitoring,
   },
   {
     path: '/profile',
