@@ -45,13 +45,11 @@ const ChartOne: React.FC = () => {
   }, []);
 
   useEffect(() => {
-
     const getBankAccounts = async () => {
       try {
         const res = await axios.get(`bank_accounts?page=${currentPage}`);
         // console.log(res);
         setBankAccount((prevState) =>
-
           [...prevState, ...res.data.data].filter(
             (item, index, self) =>
               index === self.findIndex((items) => items.id === item.id),
@@ -63,7 +61,6 @@ const ChartOne: React.FC = () => {
     };
 
     getBankAccounts();
-
   }, [currentPage]);
 
   const onChange = async (value: string) => {
@@ -73,7 +70,7 @@ const ChartOne: React.FC = () => {
     const res = await axios.get(`bank-account-activity/${value}`);
 
     setRecord(res.data);
-    
+
     //Data
     dispatch(
       updateSeries({
@@ -132,23 +129,6 @@ const ChartOne: React.FC = () => {
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          {/* <div className="mt-2">
-            <select
-              id="bank"
-              name="bank"
-              value={selectBankAccount}
-              onChange={onUserChange}
-              className="bg-white pl-3 block w-44 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-              <option value="bankAccounts">Select Bank Account</option>
-              {bankAccount?.map((item: any) => (
-                <option key={item.id} value={item.id}>
-                  {item.name} - {item.account_no}
-                </option>
-              ))}
-              <option value="loadMore">...load more</option>
-            </select>
-          </div> */}
           <Select
             dropdownStyle={{ width: '400px' }}
             showSearch
