@@ -9,17 +9,21 @@ interface TypeProps {
   countUser: number[];
   dayOfTheMonth: number[];
   month: string;
+  toggleMonth: (isCurrentMonth: boolean) => void;
+  isCurrentMonth: boolean;
 }
 
 const VisitorsChart: React.FC<TypeProps> = ({
   countUser,
   dayOfTheMonth,
   month,
+  toggleMonth,
+  isCurrentMonth,
 }) => {
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
-        name: 'asdsa',
+        name: 'label',
         data: dayOfTheMonth,
       },
     ],
@@ -96,10 +100,26 @@ const VisitorsChart: React.FC<TypeProps> = ({
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
-      <div>
+      <div className="flex justify-between">
         <h3 className="text-xl font-semibold text-black dark:text-white">
           {month + ' Analytics'}
         </h3>
+        <div className="flex w-full max-w-45 justify-end">
+          <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
+            <button
+              onClick={() => toggleMonth(true)}
+              className={` ${isCurrentMonth ? 'bg-white shadow-card dark:bg-boxdark' : ''} rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark`}
+            >
+              Current
+            </button>
+            <button
+              onClick={() => toggleMonth(false)}
+              className={`${!isCurrentMonth ? 'bg-white shadow-card dark:bg-boxdark' : ''} rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark`}
+            >
+              Last
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="mb-2">

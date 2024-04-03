@@ -4,21 +4,22 @@ import VisitorsChart from '../../../components/Dashboard/VisitorsMonitoringChart
 import axios from '../../../http/axios.tsx';
 
 interface fetchedDataType {
-  users: number[],
-  date: number[],
-  month: string
+  users: number[];
+  date: number[];
+  month: string;
 }
 const Visitors = () => {
+  const [active, setActive] = useState(true);
   const [data, setData] = useState<fetchedDataType>({
     users: [],
     date: [],
-    month: ''
+    month: '',
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/visitors-monthly');
+        const res = await axios.get('/visitors-monthly', { params: { current: active} });
         setData(res.data);
         console.log(res.data);
       } catch (er) {
@@ -26,7 +27,11 @@ const Visitors = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [active]);
+
+  const changeMonth = async (isCurrentMonth: boolean) => {
+    setActive(isCurrentMonth);
+  };
 
   return (
     <>
@@ -34,7 +39,13 @@ const Visitors = () => {
 
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12">
-          <VisitorsChart countUser={data.users} dayOfTheMonth={data.date} month={data.month} />
+          <VisitorsChart
+            countUser={data.users}
+            dayOfTheMonth={data.date}
+            month={data.month}
+            toggleMonth={changeMonth}
+            isCurrentMonth={active}
+          />
         </div>
       </div>
     </>

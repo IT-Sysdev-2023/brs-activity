@@ -49,8 +49,9 @@ const ChartOne: React.FC = () => {
     const getBankAccounts = async () => {
       try {
         const res = await axios.get(`bank_accounts?page=${currentPage}`);
-        console.log(res);
+        // console.log(res);
         setBankAccount((prevState) =>
+
           [...prevState, ...res.data.data].filter(
             (item, index, self) =>
               index === self.findIndex((items) => items.id === item.id),
