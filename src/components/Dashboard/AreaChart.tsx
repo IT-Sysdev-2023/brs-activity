@@ -1,10 +1,6 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-
-// interface ChartFourState {
-//   series: { data: number[]; name: any }[];
-// }
 interface DataPoint {
   x: string;
   y: number;
@@ -15,6 +11,8 @@ interface TypeProps {
   data?: DataPoint[];
 }
 const AreaChart: React.FC<TypeProps> = ({ data, name }) => {
+
+  
   const opt: ApexOptions = {
     chart: {
       fontFamily: 'Satoshi, sans-serif',
