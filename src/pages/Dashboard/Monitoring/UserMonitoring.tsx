@@ -85,6 +85,7 @@ function UserMonitoring() {
       }
     };
     uploadingDtrListen();
+
   }, []);
 
   return (
@@ -93,7 +94,6 @@ function UserMonitoring() {
       <span>Bank Stat</span>
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 space-y-10">
-          <ChartOne />
           <ChartOne />
           <ReactApexChart
             options={opt}
@@ -118,23 +118,6 @@ function UserMonitoring() {
             type="area"
             height={350}
           />
-          {/* <ReactApexChart
-            options={options}
-            series={[
-              {
-                name: 'XYZ MOTORS',
-                data: [
-                  {
-                    x: new Date('2018-02-12').getTime(),
-                    y: 76,
-                  },
-                ],
-              },
-            ]}
-            type="area"
-            height={350}
-          /> */}
-          {/* <VisitorsChart countUser={data.users} dayOfTheMonth={data.date} month={data.month} /> */}
         </div>
       </div>
     </>

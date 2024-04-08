@@ -9,18 +9,11 @@ import chartOneOptions from '../../../components/componentsOptions/ChartOneOptio
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { updateSeries } from '../../../app/features/charts/ChartSeriesSlice';
 
-//Websocket
-import ws from '../../../ws';
-import ReactApexChart from 'react-apexcharts';
-import { ApexOptions } from 'apexcharts';
-
-import AreaChart from '../../../components/Dashboard/AreaChart';
 import AreaNullChart from '../../../components/Dashboard/AreaNullChart';
 import AreaChartDot from '../../../components/Dashboard/AreaChartDot';
 import ColumnChart from '../../../components/Dashboard/ColumnChart';
 
 function BankAccountMonitoring() {
-  const [selectBankAccount, setSelectedBankAccount] = useState('');
   const [areaChartRecord, setAreaChartRecord] = useState<{
     [key: string]: any;
   }>([]);
@@ -41,9 +34,6 @@ function BankAccountMonitoring() {
   const stateSeries = useAppSelector((state) => state.chartSeries.series);
 
   const onChange = async (value: string) => {
-    // console.log(`selected ${value}`);
-    setSelectedBankAccount(value);
-
     const res = await axios.get(`bank-account-activity`, {
       params: { bankAccount: value },
     });
@@ -73,7 +63,7 @@ function BankAccountMonitoring() {
     const getBankAccounts = async () => {
       try {
         const res = await axios.get(`bank_accounts?page=${currentPage}`);
-        // console.log(res);
+        console.log(res.data);
         setBankAccount((prevState) =>
           [...prevState, ...res.data.data].filter(
             (item, index, self) =>
@@ -127,21 +117,7 @@ function BankAccountMonitoring() {
 
     fetchAreaChartRecord();
     fetchBankWithBankAcount();
-    // fetchData();
 
-    // const uploadingDtrListen = async () => {
-    //   try {
-    //     ws.private('admin-dtr-uploading').listen(
-    //       '.dtr-inserted-event',
-    //       (event: any) => {
-    //         console.log(event);
-    //       },
-    //     );
-    //   } catch (er) {
-    //     console.log(er);
-    //   }
-    // };
-    // uploadingDtrListen();
   }, []);
 
   return (
