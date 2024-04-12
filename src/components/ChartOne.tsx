@@ -32,6 +32,7 @@ const ChartOne: React.FC = () => {
         },
       });
 
+      //Redux
       dispatch(
         updateSeries({
           index: 0,

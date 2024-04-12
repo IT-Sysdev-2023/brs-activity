@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ws from '../ws.tsx';
 import axios from '../http/axios.tsx';
 import PercentageChange from './PercentageChange.tsx';
+import { useAppDispatch, useAppSelector } from '../app/hooks.ts';
+import { setOnlineUser, addOnlineUser, removeOnlineUser } from '../app/features/OnlineUsers.ts';
 // import { useOnlineUsersStore } from '../hooks/onlineUsers.tsx';
 
 const CardOne: React.FC = () => {
   const [onlineUsers, setOnlineUsers] = useState<any[]>([]);
   const [changes, setChanges] = useState<{onlineChanges: number}>({onlineChanges: 0.0});
+
+  const dispatch = useAppDispatch();
+  const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,15 +19,13 @@ const CardOne: React.FC = () => {
       try {
 
         ws.join('online.users')
-          .here((users) => setOnlineUsers(users))
+          .here((user: any) => dispatch(setOnlineUser(user)))
           .joining(async (user: any) =>
-            setOnlineUsers((prevArray) => [...prevArray, user]),
+            dispatch(addOnlineUser(user)),
           )
           .leaving(async (user: any) =>
-            setOnlineUsers((prevArray) =>
-              prevArray.filter((onlineUser) => onlineUser.id !== user.id),
-            ),
-          );
+            dispatch(removeOnlineUser(user)),
+          ); 
 
         const res = await axios.get('online-percentage-change');
         setChanges(res.data);
@@ -62,7 +65,7 @@ const CardOne: React.FC = () => {
       <div className="mt-4 flex items-end justify-between">
         <div>
           <h4 className="text-title-md font-bold text-black dark:text-white">
-            {onlineUsers.length}
+            {defaultValue.length}
           </h4>
           <span className="text-sm font-medium">Total Online Users</span>
         </div>

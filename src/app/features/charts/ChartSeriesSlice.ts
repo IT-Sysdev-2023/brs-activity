@@ -18,7 +18,6 @@ const initialState: ChartOneState = {
       data: [],
       // color: '',
     },
-
     {
       name: '',
       data: [],
