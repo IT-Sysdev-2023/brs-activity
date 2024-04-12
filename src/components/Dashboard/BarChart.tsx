@@ -3,7 +3,7 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const BarChart: React.FC<{ name?: string; users: any; data: any }> = ({
-  name = 'DTR Uploading Monitoring',
+  name = 'DTR Uploading Monitoring Stat',
   users,
   data,
 }) => {
@@ -11,6 +11,7 @@ const BarChart: React.FC<{ name?: string; users: any; data: any }> = ({
   const series = [
     {
       // parseFloat(data[data.length - 1].progress.toFixed(2))
+      name: 'Progress',
       data:
         data.length > 0
           ? data
@@ -26,6 +27,7 @@ const BarChart: React.FC<{ name?: string; users: any; data: any }> = ({
       //   y: 13
       // }],
     },
+    
   ];
 
   const options: ApexOptions = {

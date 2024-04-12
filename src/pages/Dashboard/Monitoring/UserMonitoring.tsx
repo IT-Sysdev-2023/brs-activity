@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 // import axios from '../../../http/axios';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
@@ -9,6 +9,10 @@ import {
   addOnlineUser,
   removeOnlineUser,
 } from '../../../app/features/OnlineUsers';
+import TableOne from '../../../components/TableOne';
+import ChatCard from '../../../components/ChatCard';
+import OnlineUsersCard from '../../../components/Dashboard/OnlineUsersCard';
+import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 
 const UserMonitoring: React.FC = () => {
   const [userProgress, setUserProgress] = useState([]);
@@ -28,9 +32,8 @@ const UserMonitoring: React.FC = () => {
         (event: any) => {
           const { currentRow, totalRows, userId } = event;
 
-          const percentage = (currentRow / totalRows) * 100;
+          const percentage = Math.floor((currentRow / totalRows) * 100);
 
-          // setUserProgress([{x: userId, y: percentage}]);
           setUserProgress((prevProgress) => {
             const checkId = prevProgress.some((item) => item.x === userId);
 
@@ -40,17 +43,6 @@ const UserMonitoring: React.FC = () => {
               return [{ x: userId, y: percentage }];
             }
           });
-
-          // if(indexToUpdate !== -1){
-          //   // setUserProgress([ {x: userId, y: percentage}])
-          //   console.log(userProgress);
-          // }else{
-          // console.log(defaultValue.find(item => item.id === userId));
-          // }
-          // setUserProgress((prevProgress) => [
-          //   ...prevProgress.filter((item) => item.x !== userId),
-          //   { x: userId, y: percentage },
-          // ]);
         },
       );
     };
@@ -58,20 +50,22 @@ const UserMonitoring: React.FC = () => {
     uploadingDtrListen();
   }, []);
 
-  // console.log(defaultValue.find(item => item.id === userId));
-
   return (
     <>
       <Breadcrumb pageName="DTR Uploading Monitoring" />
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
-        <div className="col-span-12 space-y-10">
+        <div className="col-span-12 space-y-10 ">
           <BarChart users={defaultValue} data={userProgress} />
-          <ul>
-            {/* {defaultValue.map((item) => (
+          {/* <ul>
+            {defaultValue.map((item) => (
               <li key={item.id}>{item.name}</li>
-            ))} */}
-          </ul>
+            ))}
+          </ul> */}
         </div>
+        <div className="col-span-12 xl:col-span-8">
+          <UsersActivityTable title="Activity Log"/>
+        </div>
+        <OnlineUsersCard title='Online Users'/>
       </div>
     </>
   );
