@@ -5,6 +5,7 @@ import UserThree from '../../images/user/user-03.png';
 import UserFour from '../../images/user/user-04.png';
 import UserFive from '../../images/user/user-05.png';
 import { useAppSelector } from '../../app/hooks';
+import { duration } from '../../pages/Helper';
 // import UserFiv2e from '../../images/user/user-05.png';
 
 interface OnlineUsersInterface {
@@ -48,12 +49,12 @@ const OnlineUsersCard: React.FC<OnlineUsersInterface> = ({ title }) => {
                       <span className="text-sm text-black dark:text-white">
                         {item.details?.employee_position}
                       </span>
-                      <span className="text-xs">&nbsp;&nbsp; {item.logged_in_at}</span>
+                      <span className="text-xs">&nbsp;&nbsp; {duration(item.logged_in_at)}</span>
                     </p>
                   </div>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
+                  {/* <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
                     <span className="text-sm font-medium text-white">3</span>
-                  </div>
+                  </div> */}
                 </div>
               </Link>
             ))

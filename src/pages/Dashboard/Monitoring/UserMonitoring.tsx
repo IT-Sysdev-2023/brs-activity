@@ -13,7 +13,7 @@ import TableOne from '../../../components/TableOne';
 import ChatCard from '../../../components/ChatCard';
 import OnlineUsersCard from '../../../components/Dashboard/OnlineUsersCard';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
-import { useWsOnlineUsers } from '../../Helper';
+import { duration, useWsOnlineUsers } from '../../Helper';
 
 const UserMonitoring: React.FC = () => {
   const [userProgress, setUserProgress] = useState([]);

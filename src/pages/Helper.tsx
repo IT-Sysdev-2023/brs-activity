@@ -18,30 +18,35 @@ export function useWsOnlineUsers() {
   subscribe();
 }
 
-export function duration(time) {
-  // Date string
-const dateString = "Fri, Apr 12, 2024 4:16 PM";
+export function duration(dateString: string) {
+  // Parse the date string into a Date object
+  const date = new Date(dateString).getTime();
 
-// Parse the date string into a Date object
-const date = new Date(dateString);
+  // Current time
+  const currentTime = new Date().getTime();
 
-// Current time
-const currentTime = new Date();
+  // Calculate the difference
+  const difference = currentTime - date;
 
-// Calculate the difference
-const difference = currentTime - date;
+  // Convert difference to hours, minutes, seconds
+  const millisecondsInHour = 1000 * 60 * 60;
+  const millisecondsInMinute = 1000 * 60;
+  const millisecondsInSecond = 1000;
 
-// Convert difference to hours, minutes, seconds
-const millisecondsInHour = 1000 * 60 * 60;
-const millisecondsInMinute = 1000 * 60;
-const millisecondsInSecond = 1000;
+  const hours = Math.floor(difference / millisecondsInHour);
+  const remainingMillisecondsAfterHours = difference % millisecondsInHour;
+  const minutes = Math.floor(
+    remainingMillisecondsAfterHours / millisecondsInMinute,
+  );
+  const remainingMillisecondsAfterMinutes =
+    remainingMillisecondsAfterHours % millisecondsInMinute;
+  const seconds = Math.floor(
+    remainingMillisecondsAfterMinutes / millisecondsInSecond,
+  );
 
-const hours = Math.floor(difference / millisecondsInHour);
-const remainingMillisecondsAfterHours = difference % millisecondsInHour;
-const minutes = Math.floor(remainingMillisecondsAfterHours / millisecondsInMinute);
-const remainingMillisecondsAfterMinutes = remainingMillisecondsAfterHours % millisecondsInMinute;
-const seconds = Math.floor(remainingMillisecondsAfterMinutes / millisecondsInSecond);
-
-console.log(`Time elapsed: ${hours} hours, ${minutes} minutes, ${seconds} seconds.`);
-
+  return hours === 0
+    ? `${minutes} min, ${seconds} sec.`
+    : minutes === 0 && hours === 0
+      ? `${seconds} seconds.`
+      : `${hours} hours, ${minutes} min, ${seconds} sec.`;
 }
