@@ -13,18 +13,20 @@ import TableOne from '../../../components/TableOne';
 import ChatCard from '../../../components/ChatCard';
 import OnlineUsersCard from '../../../components/Dashboard/OnlineUsersCard';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
+import { useWsOnlineUsers } from '../../Helper';
 
 const UserMonitoring: React.FC = () => {
   const [userProgress, setUserProgress] = useState([]);
 
   const dispatch = useAppDispatch();
-  const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers);
 
   useEffect(() => {
-    ws.join('online.users')
-      .here((user: any) => dispatch(setOnlineUser(user)))
-      .joining(async (user: any) => dispatch(addOnlineUser(user)))
-      .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
+    const onlineUserWs = () => {
+      ws.join('online.users')
+        .here((user: any) => dispatch(setOnlineUser(user)))
+        .joining(async (user: any) => dispatch(addOnlineUser(user)))
+        .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
+    } 
 
     const uploadingDtrListen = () => {
       ws.private('admin-dtr-uploading').listen(
@@ -47,6 +49,8 @@ const UserMonitoring: React.FC = () => {
       );
     };
 
+    // useWsOnlineUsers();
+    onlineUserWs();
     uploadingDtrListen();
   }, []);
 
@@ -55,7 +59,7 @@ const UserMonitoring: React.FC = () => {
       <Breadcrumb pageName="DTR Uploading Monitoring" />
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 space-y-10 ">
-          <BarChart users={defaultValue} data={userProgress} />
+          <BarChart data={userProgress} />
           {/* <ul>
             {defaultValue.map((item) => (
               <li key={item.id}>{item.name}</li>
@@ -65,7 +69,7 @@ const UserMonitoring: React.FC = () => {
         <div className="col-span-12 xl:col-span-8">
           <UsersActivityTable title="Activity Log"/>
         </div>
-        <OnlineUsersCard title='Online Users'/>
+        <OnlineUsersCard title='Online Users' />
       </div>
     </>
   );

@@ -11,7 +11,7 @@ const UsersActivityTable: React.FC<{title?: string}> = ({title}) => {
         {title}
       </h4>
 
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
@@ -168,7 +168,7 @@ const UsersActivityTable: React.FC<{title?: string}> = ({title}) => {
             <p className="text-meta-5">1.9%</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

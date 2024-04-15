@@ -37,7 +37,9 @@ export const onlineUsersSlice = createSlice({
     },
 
     addOnlineUser: (state, action) => {
-      state.onlineUsers.push(action.payload);
+      if(!state.onlineUsers.some(item => item.id === action.payload.id)){
+        state.onlineUsers.push(action.payload);
+      }
     },
 
     removeOnlineUser: (state, action) => {
