@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   setOnlineUser,
   addOnlineUser,
@@ -6,16 +6,13 @@ import {
 } from '../app/features/OnlineUsers';
 import ws from '../ws';
 
-export function useWsOnlineUsers() {
+export const useWsOnlineUsers = () =>  {
   const dispatch = useAppDispatch();
 
-  const subscribe = () => {
-    ws.join('online.users')
+  return ws.join('online.users')
       .here((user: any) => dispatch(setOnlineUser(user)))
       .joining(async (user: any) => dispatch(addOnlineUser(user)))
       .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
-  };
-  subscribe();
 }
 
 export function duration(dateString: string) {
@@ -48,5 +45,9 @@ export function duration(dateString: string) {
     ? `${minutes} min, ${seconds} sec.`
     : minutes === 0 && hours === 0
       ? `${seconds} seconds.`
-      : `${hours} hours, ${minutes} min, ${seconds} sec.`;
+      : `${hours} hrs, ${minutes} min, ${seconds} sec.`;
 }
+export const defaultOnlineUsers = () => {
+  const onlineUsers = useAppSelector((state) => state.onlineUsers.onlineUsers);
+  return onlineUsers;
+};

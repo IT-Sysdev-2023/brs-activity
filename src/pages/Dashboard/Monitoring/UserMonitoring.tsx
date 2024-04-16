@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import axios from '../../../http/axios';
+import axios from '../../../http/axios';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
@@ -17,16 +17,10 @@ import { duration, useWsOnlineUsers } from '../../Helper';
 
 const UserMonitoring: React.FC = () => {
   const [userProgress, setUserProgress] = useState([]);
-
-  const dispatch = useAppDispatch();
+  const [log, setLog] = useState([]);
+  useWsOnlineUsers(); 
 
   useEffect(() => {
-    const onlineUserWs = () => {
-      ws.join('online.users')
-        .here((user: any) => dispatch(setOnlineUser(user)))
-        .joining(async (user: any) => dispatch(addOnlineUser(user)))
-        .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
-    } 
 
     const uploadingDtrListen = () => {
       ws.private('admin-dtr-uploading').listen(
@@ -49,27 +43,24 @@ const UserMonitoring: React.FC = () => {
       );
     };
 
-    // useWsOnlineUsers();
-    onlineUserWs();
+  
+    
     uploadingDtrListen();
   }, []);
-
   return (
     <>
-      <Breadcrumb pageName="DTR Uploading Monitoring" />
+      <Breadcrumb pageName="Real-Time Monitoring Statistics" />
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 space-y-10 ">
-          <BarChart data={userProgress} />
-          {/* <ul>
-            {defaultValue.map((item) => (
-              <li key={item.id}>{item.name}</li>
-            ))}
-          </ul> */}
+          <BarChart data={userProgress} name='DTR Uploading Monitoring' />
         </div>
-        <div className="col-span-12 xl:col-span-8">
-          <UsersActivityTable title="Activity Log"/>
+        <div className="col-span-12 space-y-10 ">
+          <BarChart data={userProgress} name='Reconciliation Monitoring Statistics'/>
         </div>
-        <OnlineUsersCard title='Online Users' />
+        {/* <div className="col-span-12 xl:col-span-8"> */}
+          <UsersActivityTable title="Users Log" data={log}/>
+        {/* </div> */}
+        {/* <OnlineUsersCard title='Online Users' /> */}
       </div>
     </>
   );
