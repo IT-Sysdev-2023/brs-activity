@@ -5,42 +5,38 @@ import {
   removeOnlineUser,
 } from '../app/features/OnlineUsers';
 import ws from '../ws';
+import dayjs from 'dayjs';
+import Duration from 'dayjs/plugin/duration';
 
-export const useWsOnlineUsers = () =>  {
+dayjs.extend(Duration);
+
+export const useWsOnlineUsers = () => {
   const dispatch = useAppDispatch();
 
-  return ws.join('online.users')
-      .here((user: any) => dispatch(setOnlineUser(user)))
-      .joining(async (user: any) => dispatch(addOnlineUser(user)))
-      .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
-}
+  return ws
+    .join('online.users')
+    .here((user: any) => dispatch(setOnlineUser(user)))
+    .joining(async (user: any) => dispatch(addOnlineUser(user)))
+    .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
+};
 
 export function duration(timeIn: string, timeOut?: string | null) {
-  // Parse the date string into a Date object
-  const date = new Date(timeIn).getTime();
 
   // Current time
-  console.log(timeOut);
-  const currentTime = timeOut != null ? new Date(timeOut).getTime() : new Date().getTime();
+  const currentTime = timeOut != null ? dayjs(timeOut) : dayjs();
 
-  // Calculate the difference
-  const difference = currentTime - date;
+  const startingTime = dayjs(timeIn);
 
-  // Convert difference to hours, minutes, seconds
-  const millisecondsInHour = 1000 * 60 * 60;
-  const millisecondsInMinute = 1000 * 60;
-  const millisecondsInSecond = 1000;
+  // Calculate the difference in milliseconds
+  const timeDifference = currentTime.diff(startingTime);
 
-  const hours = Math.floor(difference / millisecondsInHour);
-  const remainingMillisecondsAfterHours = difference % millisecondsInHour;
-  const minutes = Math.floor(
-    remainingMillisecondsAfterHours / millisecondsInMinute,
-  );
-  const remainingMillisecondsAfterMinutes =
-    remainingMillisecondsAfterHours % millisecondsInMinute;
-  const seconds = Math.floor(
-    remainingMillisecondsAfterMinutes / millisecondsInSecond,
-  );
+  // Convert the difference to a human-readable format
+  const duration = dayjs.duration(timeDifference);
+
+  // Get the time spent in hours, minutes, and seconds
+  const hours = duration.hours();
+  const minutes = duration.minutes();
+  const seconds = duration.seconds();
 
   return hours === 0
     ? `${minutes} min, ${seconds} sec.`

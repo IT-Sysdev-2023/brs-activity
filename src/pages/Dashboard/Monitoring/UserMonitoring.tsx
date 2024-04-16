@@ -45,7 +45,6 @@ const UserMonitoring: React.FC = () => {
 
     const usersLog = async () => {
       const res = await axios.get('users-log');
-      console.log(res.data);
       setLog(res.data);
     }
 

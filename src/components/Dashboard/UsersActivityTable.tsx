@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import BrandOne from '../../images/brand/brand-01.svg';
 import BrandTwo from '../../images/brand/brand-02.svg';
 import BrandThree from '../../images/brand/brand-03.svg';
@@ -5,9 +6,15 @@ import BrandFour from '../../images/brand/brand-04.svg';
 import BrandFive from '../../images/brand/brand-05.svg';
 import { defaultOnlineUsers, duration } from '../../pages/Helper';
 
-const UsersActivityTable: React.FC<{ title?: string, data: any }> = ({ title, data }) => {
+const UsersActivityTable: React.FC<{ title?: string; data: any }> = ({
+  title,
+  data,
+}) => {
   const useOnlineUsers = defaultOnlineUsers();
 
+  const formatDate = (date) => {
+    return dayjs(date).format('MMM D, YYYY h:mm A');
+  };
   // console.log(useOnlineUsers);
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -49,15 +56,19 @@ const UsersActivityTable: React.FC<{ title?: string, data: any }> = ({ title, da
             className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5"
             key={item.id}
           >
-          <div className="flex items-center gap-3 p-2.5 xl:p-5">
+            <div className="flex items-center gap-3 p-2.5 xl:p-5">
               <div className="relative h-14 w-14 rounded-full">
-                <img src={`https://dev.bankrs.com/storage/user_images/${item.id}`} alt={item.id} className="rounded-full"/>
+                <img
+                  src={`https://dev.bankrs.com/storage/user_images/${item.id}`}
+                  alt={item.id}
+                  className="rounded-full"
+                />
               </div>
               <p className="hidden text-black dark:text-white sm:block">
                 {
-                // Object.keys(item.action)[0]
-                item.action[Object.keys(item.action)[0]].details.details.employee_name
-                
+                  // Object.keys(item.action)[0]
+                  item.action[Object.keys(item.action)[0]].details.details
+                    .employee_name
                 }
               </p>
             </div>
@@ -68,17 +79,30 @@ const UsersActivityTable: React.FC<{ title?: string, data: any }> = ({ title, da
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-5">{item.action['logged_in']?.created_at}</p>
+              <p className="text-meta-5">
+                {formatDate(item.action['logged_in']?.created_at)}
+              </p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{duration(item.action['logged_in']?.created_at, item.action['logged_out']?.created_at)}</p>
+              <p className="text-black dark:text-white">
+                {duration(
+                  item.action['logged_in']?.created_at,
+                  item.action['logged_out']?.created_at,
+                )}
+              </p>
             </div>
-   {/*
-
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-meta-3">Active</p>
-            </div> */}
+            
+              <p
+                className={`${item.action['logged_out']?.created_at ? 'text-meta-1' : 'text-meta-3'}`}
+              >
+                {item.action['logged_out']?.created_at
+                  ? 'Logged Out'
+                  : 'Logged In'}
+              </p>
+            </div>
+           
           </div>
         ))}
       </div>
