@@ -18,7 +18,6 @@ const OnlineUsersCard: React.FC<OnlineUsersInterface> = ({ title }) => {
       <h4 className="mb-6 px-7.5 text-xl font-semibold text-black dark:text-white">
         {`${title} (${useOnlineUsers.length})`}
       </h4>
-
       <div>
         {useOnlineUsers.map((item) => (
           <Link

@@ -15,12 +15,13 @@ export const useWsOnlineUsers = () =>  {
       .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
 }
 
-export function duration(dateString: string) {
+export function duration(timeIn: string, timeOut?: string | null) {
   // Parse the date string into a Date object
-  const date = new Date(dateString).getTime();
+  const date = new Date(timeIn).getTime();
 
   // Current time
-  const currentTime = new Date().getTime();
+  console.log(timeOut);
+  const currentTime = timeOut != null ? new Date(timeOut).getTime() : new Date().getTime();
 
   // Calculate the difference
   const difference = currentTime - date;
