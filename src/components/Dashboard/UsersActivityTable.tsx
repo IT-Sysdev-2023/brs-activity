@@ -95,7 +95,7 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
             
               <p
-                className={`${!isLoggedInOrOut(
+                className={`${isLoggedInOrOut(
                   item.action['logged_in']?.created_at,
                   item.action['logged_out']?.created_at,
                 ) ? 'text-meta-1' : 'text-meta-3'}`}
