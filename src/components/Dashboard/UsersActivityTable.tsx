@@ -4,7 +4,7 @@ import BrandTwo from '../../images/brand/brand-02.svg';
 import BrandThree from '../../images/brand/brand-03.svg';
 import BrandFour from '../../images/brand/brand-04.svg';
 import BrandFive from '../../images/brand/brand-05.svg';
-import { defaultOnlineUsers, duration } from '../../pages/Helper';
+import { defaultOnlineUsers, duration, isLoggedInOrOut } from '../../pages/Helper';
 
 const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
   title,
@@ -95,11 +95,15 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
             
               <p
-                className={`${item.action['logged_out']?.created_at ? 'text-meta-1' : 'text-meta-3'}`}
+                className={`${!isLoggedInOrOut(
+                  item.action['logged_in']?.created_at,
+                  item.action['logged_out']?.created_at,
+                ) ? 'text-meta-1' : 'text-meta-3'}`}
               >
-                {item.action['logged_out']?.created_at
-                  ? 'Logged Out'
-                  : 'Logged In'}
+                {isLoggedInOrOut(
+                  item.action['logged_in']?.created_at,
+                  item.action['logged_out']?.created_at,
+                ) ? 'Logged Out' : 'logged In'}
               </p>
             </div>
            

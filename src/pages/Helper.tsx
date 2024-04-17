@@ -20,11 +20,13 @@ export const useWsOnlineUsers = () => {
     .leaving(async (user: any) => dispatch(removeOnlineUser(user)));
 };
 
+export const isLoggedInOrOut = (timeOut: string, timeIn: string) => {
+  return (timeOut === null || dayjs(timeIn).isAfter(dayjs(timeOut)) ? true : false) ;
+}
+
 export function duration(timeIn: string, timeOut?: string | null) {
-
-  // Current time
-  const currentTime = timeOut != null ? dayjs(timeOut) : dayjs();
-
+  
+  const currentTime = timeOut === null || dayjs(timeIn).isAfter(dayjs(timeOut)) ? dayjs() : dayjs(timeOut);
   const startingTime = dayjs(timeIn);
 
   // Calculate the difference in milliseconds
@@ -44,6 +46,7 @@ export function duration(timeIn: string, timeOut?: string | null) {
       ? `${seconds} seconds.`
       : `${hours} hrs, ${minutes} min, ${seconds} sec.`;
 }
+
 export const defaultOnlineUsers = () => {
   const onlineUsers = useAppSelector((state) => state.onlineUsers.onlineUsers);
   return onlineUsers;
