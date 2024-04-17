@@ -9,34 +9,77 @@ import {
   addOnlineUser,
   removeOnlineUser,
 } from '../../../app/features/OnlineUsers';
-import TableOne from '../../../components/TableOne';
-import ChatCard from '../../../components/ChatCard';
-import OnlineUsersCard from '../../../components/Dashboard/OnlineUsersCard';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
-import { duration, useWsOnlineUsers } from '../../Helper';
+import { useWsOnlineUsers } from '../../Helper';
+import SampleChart from '../../../components/Dashboard/SampleChart';
+// import StatisticsChart from '../../../components/Dashboard/StatisticsChart';
 
 const UserMonitoring: React.FC = () => {
-  const [userProgress, setUserProgress] = useState([]);
+  const [userProgressDtr, setUserProgressDtr] = useState([]);
+  const [userProgressReconciliation, setUserProgressReconciliation] = useState(
+    [],
+  );
   const [log, setLog] = useState([]);
-  useWsOnlineUsers(); 
+  useWsOnlineUsers();
 
   useEffect(() => {
-
     const uploadingDtrListen = () => {
       ws.private('admin-dtr-uploading').listen(
         '.dtr-inserted-event',
         (event: any) => {
-          const { currentRow, totalRows, userId } = event;
+          const { currentRow, totalRows, userId, username } = event;
 
           const percentage = Math.floor((currentRow / totalRows) * 100);
 
-          setUserProgress((prevProgress) => {
-            const checkId = prevProgress.some((item) => item.x === userId);
-
-            if (!checkId) {
-              return [...prevProgress, { x: userId, y: percentage }];
+          setUserProgressDtr((prevProgress) => {
+            const index = prevProgress.findIndex((item) => item.a === userId);
+            if (index !== -1) {
+              // Create a copy of the previous progress array
+              const updatedProgress = [...prevProgress];
+              // Update the percentage value of the object with the specified ID
+              updatedProgress[index] = {
+                ...updatedProgress[index],
+                y: percentage,
+              };
+              // Return the updated array
+              return updatedProgress;
+              
             } else {
-              return [{ x: userId, y: percentage }];
+              // Add a new object to the progress array
+              return [...prevProgress, { a: userId, x: username, y: percentage }];
+            }
+          });
+
+
+        },
+      );
+    };
+
+    const reconciliationListen = () => {
+      ws.private('admin-bdo-reconciling').listen(
+        '.bdo-reconciled-event',
+        (event: any) => {
+          const { currentRow, totalRows, username, id } = event;
+
+          const percentage = Math.floor((currentRow / totalRows) * 100);
+
+          console.log('object')
+          setUserProgressReconciliation((prevProgress) => {
+            const index = prevProgress.findIndex((item) => item.a === id);
+            if (index !== -1) {
+              // Create a copy of the previous progress array
+              const updatedProgress = [...prevProgress];
+              // Update the percentage value of the object with the specified ID
+              updatedProgress[index] = {
+                ...updatedProgress[index],
+                y: percentage,
+              };
+              // Return the updated array
+              return updatedProgress;
+
+            } else {
+              // Add a new object to the progress array
+              return [...prevProgress, { a: id, x: username, y: percentage }];
             }
           });
         },
@@ -46,10 +89,11 @@ const UserMonitoring: React.FC = () => {
     const usersLog = async () => {
       const res = await axios.get('users-log');
       setLog(res.data);
-    }
+    };
 
     usersLog();
-    
+
+    reconciliationListen();
     uploadingDtrListen();
   }, []);
   return (
@@ -57,15 +101,19 @@ const UserMonitoring: React.FC = () => {
       <Breadcrumb pageName="Real-Time Monitoring Statistics" />
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 space-y-10 ">
-          <BarChart data={userProgress} name='DTR Uploading Monitoring' />
+          <BarChart data={userProgressDtr} name="DTR Uploading Monitoring" />
         </div>
         <div className="col-span-12 space-y-10 ">
-          <BarChart data={userProgress} name='Reconciliation Monitoring Statistics'/>
+          <BarChart
+            data={userProgressReconciliation}
+            name="Reconciliation Monitoring Statistics"
+          />
         </div>
         {/* <div className="col-span-12 xl:col-span-8"> */}
-          <UsersActivityTable title="Users Log" data={log}/>
+        <UsersActivityTable title="Users Log" data={log} />
         {/* </div> */}
         {/* <OnlineUsersCard title='Online Users' /> */}
+        {/* <SampleChart/> */}
       </div>
     </>
   );

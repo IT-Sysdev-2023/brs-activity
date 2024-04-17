@@ -6,7 +6,7 @@ import BrandFour from '../../images/brand/brand-04.svg';
 import BrandFive from '../../images/brand/brand-05.svg';
 import { defaultOnlineUsers, duration } from '../../pages/Helper';
 
-const UsersActivityTable: React.FC<{ title?: string; data: any }> = ({
+const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
   title,
   data,
 }) => {
