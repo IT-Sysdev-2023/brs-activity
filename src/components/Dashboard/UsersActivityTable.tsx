@@ -59,7 +59,7 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
               <div className="relative h-14 w-14 rounded-full">
                 <img
-                  src={`https://dev.bankrs.com/storage/user_images/${item.id}`}
+                  src={`https://bankrs.com/storage/user_images/${item.id}`}
                   alt={item.id}
                   className="rounded-full"
                 />
