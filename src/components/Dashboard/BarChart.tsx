@@ -3,16 +3,13 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const BarChart: React.FC<{ name?: string; data: any }> = ({
-  name = 'DTR Uploading Monitoring Stat',
+  name = 'DTR Uploading Monitoring',
   data,
 }) => {
   const series = [
     {
       name: 'Progress',
-      data:
-        data.length > 0
-          ? data
-          : [],
+      data: data.length > 0 ? data : [],
     },
   ];
 

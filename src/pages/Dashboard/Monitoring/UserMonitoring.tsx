@@ -4,15 +4,8 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import {
-  setOnlineUser,
-  addOnlineUser,
-  removeOnlineUser,
-} from '../../../app/features/OnlineUsers';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 import { useWsOnlineUsers } from '../../Helper';
-import SampleChart from '../../../components/Dashboard/SampleChart';
-// import StatisticsChart from '../../../components/Dashboard/StatisticsChart';
 
 const UserMonitoring: React.FC = () => {
   const [userProgressDtr, setUserProgressDtr] = useState([]);
@@ -43,14 +36,12 @@ const UserMonitoring: React.FC = () => {
               };
               // Return the updated array
               return updatedProgress;
-              
+
             } else {
               // Add a new object to the progress array
               return [...prevProgress, { a: userId, x: username, y: percentage }];
             }
           });
-
-
         },
       );
     };
@@ -101,7 +92,7 @@ const UserMonitoring: React.FC = () => {
       <Breadcrumb pageName="Real-Time Monitoring Statistics" />
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 space-y-10 ">
-          <BarChart data={userProgressDtr} name="DTR Uploading Monitoring" />
+          <BarChart data={userProgressDtr} name="DTR Uploading" />
         </div>
         <div className="col-span-12 space-y-10 ">
           <BarChart
