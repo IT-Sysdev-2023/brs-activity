@@ -101,7 +101,7 @@ const UserMonitoring: React.FC = () => {
           />
         </div>
         {/* <div className="col-span-12 xl:col-span-8"> */}
-        <UsersActivityTable title="Users Log" data={log} />
+        <UsersActivityTable title="Users Authentication Log" data={log} />
         {/* </div> */}
         {/* <OnlineUsersCard title='Online Users' /> */}
         {/* <SampleChart/> */}

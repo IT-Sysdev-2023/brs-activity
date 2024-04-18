@@ -1,14 +1,19 @@
 import dayjs from 'dayjs';
-import { duration, isLoggedInOrOut } from '../../pages/Helper';
+import {
+  defaultOnlineUsers,
+  duration,
+  isLoggedInOrOut,
+} from '../../pages/Helper';
 
 const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
   title,
   data,
 }) => {
-  // const useOnlineUsers = defaultOnlineUsers();
+  const useOnlineUsers = defaultOnlineUsers();
 
+  // console.log(useOnlineUsers)
   const formatDate = (date) => {
-    return dayjs(date).format('MMM D, YYYY h:mm A');
+    return dayjs(date).format('h:mm A');
   };
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -52,13 +57,15 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
           >
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
               <div className="relative">
-              <div className="w-14 h-14 rounded-full overflow-hidden">
-                <img
-                  src={`https://bankrs.com/storage/user_images/${item.id}`}
-                  alt={item.id}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div className="w-14 h-14 rounded-full overflow-hidden">
+                  <img
+                    src={`https://bankrs.com/storage/user_images/${item.id}`}
+                    alt={item.id}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {useOnlineUsers.some(onlineId => onlineId.id === item.id) && (<div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={{backgroundColor:'#21d973'}}></div>)}
+                
               </div>
               <p className="hidden text-black dark:text-white sm:block">
                 {
