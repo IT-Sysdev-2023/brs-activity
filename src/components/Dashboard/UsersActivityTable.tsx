@@ -51,12 +51,14 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
             key={item.id}
           >
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <div className="relative h-14 w-14 rounded-full">
+              <div className="relative">
+              <div className="w-14 h-14 rounded-full overflow-hidden">
                 <img
                   src={`https://bankrs.com/storage/user_images/${item.id}`}
                   alt={item.id}
-                  className="rounded-full"
+                  className="w-full h-full object-cover"
                 />
+              </div>
               </div>
               <p className="hidden text-black dark:text-white sm:block">
                 {
