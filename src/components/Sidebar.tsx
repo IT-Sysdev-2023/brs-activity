@@ -206,7 +206,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              User Monitoring
+                              Real-Time Monitoring
                             </NavLink>
                           </li>
                           <li>
@@ -217,7 +217,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Online Monitoring
+                              Users Monitoring
                             </NavLink>
                           </li>
                         </ul>

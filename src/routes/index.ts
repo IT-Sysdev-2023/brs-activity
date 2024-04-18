@@ -21,7 +21,7 @@ const coreRoutes = [
   },
   {
     path: '/visitors',
-    title: 'Visitors Monitoring',
+    title: 'Users Activity Monitoring',
     component: VisitorMonitoring,
   },
   {

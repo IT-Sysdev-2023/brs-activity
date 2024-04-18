@@ -65,6 +65,11 @@ const UserMonitoring: React.FC = () => {
                 ...updatedProgress[index],
                 y: percentage,
               };
+
+              // if(percentage === 100){
+              //   ws.leave(`admin-bdo-reconciling.${id}.${bankAccount}`);
+              // }
+
               // Return the updated array
               return updatedProgress;
 
@@ -101,7 +106,7 @@ const UserMonitoring: React.FC = () => {
           />
         </div>
         {/* <div className="col-span-12 xl:col-span-8"> */}
-        <UsersActivityTable title="Users Authentication Log" data={log} />
+        {/* <UsersActivityTable title="Users Authentication Log" data={log} /> */}
         {/* </div> */}
         {/* <OnlineUsersCard title='Online Users' /> */}
         {/* <SampleChart/> */}
