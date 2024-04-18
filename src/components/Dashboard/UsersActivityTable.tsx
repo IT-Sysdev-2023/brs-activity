@@ -93,12 +93,11 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
               </p>
             </div>
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-            
               <p
                 className={`${isLoggedInOrOut(
                   item.action['logged_in']?.created_at,
                   item.action['logged_out']?.created_at,
-                ) ? 'text-meta-3' : 'text-meta-4'}`}
+                ) ? 'text-meta-3' : 'text-meta-1'}`}
               >
                 {isLoggedInOrOut(
                   item.action['logged_in']?.created_at,
