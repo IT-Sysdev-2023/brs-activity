@@ -17,7 +17,7 @@ const Visitors = () => {
     month: '',
   });
 
-  const [log, setLog] = useState([]);
+  const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +36,7 @@ const Visitors = () => {
   useEffect(() => {
     const usersLog = async () => {
       const res = await axios.get('users-log');
+      // console.log(res.data);
       setLog(res.data);
     };
 
@@ -60,7 +61,8 @@ const Visitors = () => {
             isCurrentMonth={active}
           />
         </div>
-          <UsersActivityTable title="Users Authentication Log" data={log} />
+        <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
+          {/* <UsersActivityTable title="Users Authentication Log" data={log} /> */}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import { lazy } from 'react';
 const Calendar = lazy(() => import('../pages/Calendar'));
 const VisitorMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/VisitorsMonitoring'));
 const BankAccountMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/BankAccountMonitoring'));
-const UserMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/UserMonitoring'));
+const UserMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealTimeMonitoring'));
 const Chart = lazy(() => import('../pages/Chart'));
 const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const FormLayout = lazy(() => import('../pages/Form/FormLayout'));
@@ -26,7 +26,7 @@ const coreRoutes = [
   },
   {
     path: '/user-monitoring',
-    title: 'User Monitoring',
+    title: 'Real-Time Monitoring',
     component: UserMonitoring,
   },
   {

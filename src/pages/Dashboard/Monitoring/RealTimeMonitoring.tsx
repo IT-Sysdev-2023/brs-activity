@@ -7,12 +7,19 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 import { useWsOnlineUsers } from '../../Helper';
 
-const UserMonitoring: React.FC = () => {
-  const [userProgressDtr, setUserProgressDtr] = useState([]);
-  const [userProgressReconciliation, setUserProgressReconciliation] = useState(
+interface UserProgress {
+  a: number; // Assuming `id` is of type string
+  x: string; // Assuming `username` is of type string
+  y: number; // Assuming `percentage` is of type number
+}
+
+const RealTimeMonitoring: React.FC = () => {
+  const [userProgressDtr, setUserProgressDtr] = useState<UserProgress[]>([]);
+  const [userProgressReconciliation, setUserProgressReconciliation] = useState<UserProgress[]>(
     [],
   );
-  const [log, setLog] = useState([]);
+  const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
+  
   useWsOnlineUsers();
 
   useEffect(() => {
@@ -54,7 +61,6 @@ const UserMonitoring: React.FC = () => {
 
           const percentage = Math.floor((currentRow / totalRows) * 100);
 
-          console.log('object')
           setUserProgressReconciliation((prevProgress) => {
             const index = prevProgress.findIndex((item) => item.a === id);
             if (index !== -1) {
@@ -84,6 +90,7 @@ const UserMonitoring: React.FC = () => {
 
     const usersLog = async () => {
       const res = await axios.get('users-log');
+      // console.log(res.data);
       setLog(res.data);
     };
 
@@ -105,6 +112,7 @@ const UserMonitoring: React.FC = () => {
             name="Reconciliation Monitoring Statistics"
           />
         </div>
+        <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
         {/* <div className="col-span-12 xl:col-span-8"> */}
         {/* <UsersActivityTable title="Users Authentication Log" data={log} /> */}
         {/* </div> */}
@@ -115,4 +123,4 @@ const UserMonitoring: React.FC = () => {
   );
 };
 
-export default UserMonitoring;
+export default RealTimeMonitoring;

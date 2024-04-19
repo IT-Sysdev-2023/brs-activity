@@ -5,21 +5,25 @@ import {
   isLoggedInOrOut,
 } from '../../pages/Helper';
 
-const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
-  title,
-  data,
-}) => {
+const UsersActivityTable: React.FC<{
+  title?: string;
+  data: any[];
+  columns: string[];
+}> = ({ title, data, columns }) => {
   const useOnlineUsers = defaultOnlineUsers();
+  const date = dayjs().format('MMM D, YYYY');
 
-  // console.log(useOnlineUsers)
-  const formatDate = (date) => {
+  const formatDate = (date: string) => {
     return dayjs(date).format('h:mm A');
   };
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        {title}
-      </h4>
+      <div className="flex justify-between ">
+        <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
+          {title} ({data?.length})
+        </h4>
+        <h4 className="font-semibold">{date}</h4>
+      </div>
 
       <div className="flex flex-col">
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
@@ -28,26 +32,13 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
               Users
             </h5>
           </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Ip Address
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Time In
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Cumulative Login Time
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Status
-            </h5>
-          </div>
+          {columns.map((item) => (
+            <div className="p-2.5 text-center xl:p-5" key={item}>
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
+                {item}
+              </h5>
+            </div>
+          ))}
         </div>
 
         {data.map((item) => (
@@ -64,8 +55,12 @@ const UsersActivityTable: React.FC<{ title?: string; data: any[] }> = ({
                     className="w-full h-full object-cover"
                   />
                 </div>
-                {useOnlineUsers.some(onlineId => onlineId.id === item.id) && (<div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={{backgroundColor:'#21d973'}}></div>)}
-                
+                {useOnlineUsers.some((onlineId) => onlineId.id === item.id) && (
+                  <div
+                    className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white"
+                    style={{ backgroundColor: '#21d973' }}
+                  ></div>
+                )}
               </div>
               <p className="hidden text-black dark:text-white sm:block">
                 {
