@@ -9,6 +9,7 @@ interface fetchedDataType {
   date: number[];
   month: string;
 }
+
 const Visitors = () => {
   const [active, setActive] = useState(true);
   const [data, setData] = useState<fetchedDataType>({

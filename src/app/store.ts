@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import chartSeriesReducer from './features/charts/ChartSeriesSlice'
 import onlineUsersReducer from './features/OnlineUsers'
+import authUserReducer from './features/AuthUser'
 // ...
 
 const store = configureStore({
   reducer: {
     chartSeries: chartSeriesReducer,
     onlineUsers: onlineUsersReducer,
+    authUser: authUserReducer,
   },
 })
 

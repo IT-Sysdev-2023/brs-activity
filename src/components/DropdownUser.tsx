@@ -3,28 +3,29 @@ import { Link } from 'react-router-dom';
 import axios from '../http/axios';
 
 import UserOne from '../images/user/user-01.png';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../app/hooks';
+import { setAuthRecord } from '../app/features/AuthUser';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
+  const dispatch = useDispatch();
+  const authUser = useAppSelector((state) => state.authUser)
+
   useEffect(() => {
     const fetchUser = async () => {
-      try {
         const res = await axios.get('/user');
-        setUser(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+        dispatch(setAuthRecord(res.data));
     };
 
     fetchUser();
   }, []);
-  // console.log(user);
-  // close on click outside
+
+
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
@@ -50,7 +51,7 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  if (!user) {
+  if (!authUser) {
     return <span>Loading...</span>;
   }
 
@@ -64,13 +65,13 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {user.name}
+            {authUser.name}
           </span>
-          <span className="block text-xs">{user.roles[0].name}</span>
+          <span className="block text-xs">{authUser?.roles[0]?.name}</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
-          <img src={UserOne} alt="User" />
+        <span className="h-12 w-12">
+          <img src={`https://dev.bankrs.com/storage/user_images/${authUser?.id}`} alt="User" className='rounded-full' />
         </span>
 
         <svg

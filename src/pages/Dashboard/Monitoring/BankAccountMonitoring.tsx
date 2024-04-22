@@ -12,6 +12,7 @@ import { updateSeries } from '../../../app/features/charts/ChartSeriesSlice';
 import AreaNullChart from '../../../components/Dashboard/AreaNullChart';
 import AreaChartDot from '../../../components/Dashboard/AreaChartDot';
 import ColumnChart from '../../../components/Dashboard/ColumnChart';
+import { useParams } from 'react-router-dom';
 
 function BankAccountMonitoring() {
   const [areaChartRecord, setAreaChartRecord] = useState<{
@@ -32,6 +33,7 @@ function BankAccountMonitoring() {
 
   const dispatch = useAppDispatch();
   const stateSeries = useAppSelector((state) => state.chartSeries.series);
+
 
   const onChange = async (value: string) => {
     const res = await axios.get(`bank-account-activity`, {
@@ -78,6 +80,7 @@ function BankAccountMonitoring() {
   }, [currentPage]);
 
   useEffect(() => {
+    
     const fetchBankWithBankAcount = async () => {
       const res = await axios.get('banks-of-bank-accounts');
 
@@ -98,7 +101,7 @@ function BankAccountMonitoring() {
       );
     };
 
-    const fetchAreaChartRecord = async () => {
+    const fetchAreaChartRecord = async () => { 
       try {
         const res = await axios.get(`bank-account-activity`);
 
@@ -116,7 +119,6 @@ function BankAccountMonitoring() {
 
     fetchAreaChartRecord();
     fetchBankWithBankAcount();
-
   }, []);
 
   return (
