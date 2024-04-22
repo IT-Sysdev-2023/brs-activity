@@ -21,7 +21,7 @@ export const useWsOnlineUsers = () => {
 };
 
 export const isLoggedInOrOut = (timeIn: string, timeOut?: string) => {
-  return timeOut === undefined ||dayjs(timeIn).isAfter(dayjs(timeOut))
+  return timeOut === undefined || dayjs(timeIn).isAfter(dayjs(timeOut))
     ? true
     : false;
 };

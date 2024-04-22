@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface authUserTypes {
   id: number;
   name: string;
-  roles: any[];
+  roles: {[key:string]: any};
 }
 
 const initialState: authUserTypes = {
@@ -13,13 +13,27 @@ const initialState: authUserTypes = {
   roles: [],
 };
 
+const hasRole = (roles: string[]) => { //r'fr'b2rf'r'b2r2
+  return initialState.roles.some((item: any) => item.name.includes(roles));
+}
+// const permision = (permission: string[]) => {
+
+//   return initialState.roles.some((item: any) => item.name.includes(roles));
+// }
+
 export const authUserSlice = createSlice({
   name: 'authUser',
   initialState,
   reducers: {
-    setAuthRecord: (state, action) => {
+    setAuthRecord: (_, action) => {
       return action.payload;
     },
+
+    hasRole: (_ ,action) => {
+     return hasRole(action.payload);
+    }
+
+
   },
 });
 

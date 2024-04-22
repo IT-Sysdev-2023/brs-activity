@@ -21,7 +21,7 @@ const DropdownUser = () => {
         const res = await axios.get('/user');
         dispatch(setAuthRecord(res.data));
     };
-
+    
     fetchUser();
   }, []);
 
