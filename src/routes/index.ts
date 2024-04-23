@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
-const VisitorMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/VisitorsMonitoring'));
+const UsersMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/UsersMonitoring'));
 const BankAccountMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/BankAccountMonitoring'));
-const UserMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealTimeMonitoring'));
+const RealtimeMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealTimeMonitoring'));
 const Chart = lazy(() => import('../pages/Chart'));
 const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const FormLayout = lazy(() => import('../pages/Form/FormLayout'));
@@ -20,14 +20,14 @@ const coreRoutes = [
     component: Calendar,
   },
   {
-    path: '/visitors',
+    path: '/users-monitoring',
     title: 'Users Activity Monitoring',
-    component: VisitorMonitoring,
+    component: UsersMonitoring,
   },
   {
-    path: '/user-monitoring',
+    path: '/realtime-monitoring',
     title: 'Real-Time Monitoring',
-    component: UserMonitoring,
+    component: RealtimeMonitoring,
   },
   {
     path: '/bank-account-monitoring',

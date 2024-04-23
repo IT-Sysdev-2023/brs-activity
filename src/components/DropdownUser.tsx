@@ -71,7 +71,7 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-12 w-12">
-          <img src={`${process.env.APP_URL}/${authUser?.id}`} alt="User" className='rounded-full' />
+          <img src={`${process.env.APP_URL}/storage/user_images/${authUser?.id}`} alt="User" className='rounded-full' />
         </span>
 
         <svg

@@ -10,7 +10,7 @@ interface fetchedDataType {
   month: string;
 }
 
-const Visitors = () => {
+const UsersMonitoring = () => {
   const [active, setActive] = useState(true);
   const [data, setData] = useState<fetchedDataType>({
     users: [],
@@ -62,4 +62,4 @@ const Visitors = () => {
   );
 };
 
-export default Visitors;
+export default UsersMonitoring;
