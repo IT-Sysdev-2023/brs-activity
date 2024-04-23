@@ -16,10 +16,6 @@ const initialState: authUserTypes = {
 const hasRole = (roles: string[]) => { //r'fr'b2rf'r'b2r2
   return initialState.roles.some((item: any) => item.name.includes(roles));
 }
-// const permision = (permission: string[]) => {
-
-//   return initialState.roles.some((item: any) => item.name.includes(roles));
-// }
 
 export const authUserSlice = createSlice({
   name: 'authUser',

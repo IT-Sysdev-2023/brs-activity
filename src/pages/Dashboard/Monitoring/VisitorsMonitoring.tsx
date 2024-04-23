@@ -22,14 +22,10 @@ const Visitors = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
         const res = await axios.get('/visitors-monthly', {
           params: { current: active },
         });
         setData(res.data);
-      } catch (er) {
-        console.log(er);
-      }
     };
     fetchData();
   }, [active]);
@@ -37,10 +33,8 @@ const Visitors = () => {
   useEffect(() => {
     const usersLog = async () => {
       const res = await axios.get('users-log');
-      // console.log(res.data);
       setLog(res.data);
     };
-
     usersLog();
   }, []);
 
@@ -63,7 +57,6 @@ const Visitors = () => {
           />
         </div>
         <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
-          {/* <UsersActivityTable title="Users Authentication Log" data={log} /> */}
       </div>
     </>
   );

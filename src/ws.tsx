@@ -15,7 +15,7 @@ window.Pusher = Pusher;
 
 export default new Echo({
   broadcaster: 'pusher',
-  key: 'bankrs-key',
+  key: process.env.PUSHER_APP_KEY,
   cluster: 'mt1',
   wsHost: 'devws.bankrs.com',
   wsPort: '' ?? 80,
@@ -24,7 +24,7 @@ export default new Echo({
   encrypted: true,
   enableStats: false,
   enabledTransports: ['ws', 'wss'],
-  authorizer: (channel: any, options: any) => {
+  authorizer: (channel: any, _:any) => {
     return {
       authorize: (socketId: any, callback: any) => {
         axios
