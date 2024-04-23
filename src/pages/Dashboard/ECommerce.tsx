@@ -23,10 +23,9 @@ const ECommerce = () => {
     const fetchData = async () => {
       try {
         ws.join('online.users')
-          .here((user: any) => console.log('here'))
+          .here((user: any) => dispatch(setOnlineUser(user)))
           .joining(async (user: any) =>
-            console.log('added'),
-            // dispatch(addOnlineUser(user)),
+            dispatch(addOnlineUser(user)),
           )
           .leaving(async (user: any) =>
             dispatch(removeOnlineUser(user)),

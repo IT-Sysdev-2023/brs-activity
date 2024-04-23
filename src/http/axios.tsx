@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: 'https://dev.bankrs.com',
+  baseURL: process.env.APP_URL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
@@ -12,10 +12,9 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    // Handle errors here
     if (error.response?.status === 401) {
       // Redirect to another URL when unauthorized (status code 401)
-      window.location.href = 'https://dev.bankrs.com/'; // Replace '/login' with your desired redirect URL
+      window.location.href = process.env.APP_URL; // Replace '/login' with your desired redirect URL
     }
 
     // You can add more error handling logic as needed

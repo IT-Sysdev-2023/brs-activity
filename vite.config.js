@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
       'process.env.PUSHER_APP_ID': JSON.stringify(env.PUSHER_APP_ID),
       'process.env.PUSHER_APP_SECRET': JSON.stringify(env.PUSHER_APP_SECRET),
       'process.env.WS_DRIVER': JSON.stringify(env.WS_DRIVER),
+      'process.env.APP_URL': JSON.stringify(env.APP_URL),
     },
     plugins: [react()],
     server: {

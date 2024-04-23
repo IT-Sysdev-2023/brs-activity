@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://dev.bankrs.com',
+    baseURL: process.env.APP_URL,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
