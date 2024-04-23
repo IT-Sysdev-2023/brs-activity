@@ -14,10 +14,10 @@ declare global {
 window.Pusher = Pusher;
 
 export default new Echo({
-  broadcaster: 'pusher',
+  broadcaster: process.env.WS_DRIVER,
   key: process.env.PUSHER_APP_KEY,
-  cluster: 'mt1',
-  wsHost: 'devws.bankrs.com',
+  cluster: process.env.PUSHER_APP_CLUSTER,
+  wsHost: process.env.PUSHER_HOST,
   wsPort: '' ?? 80,
   wssPort: '' ?? 443,
   forceTLS: ('https' ?? 'https') === 'https',

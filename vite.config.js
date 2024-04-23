@@ -11,7 +11,12 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     define: {
-      'process.env.PUSHER_APP_KEY': JSON.stringify(env.PUSHER_APP_KEY)
+      'process.env.PUSHER_APP_KEY': JSON.stringify(env.PUSHER_APP_KEY),
+      'process.env.PUSHER_HOST': JSON.stringify(env.PUSHER_HOST),
+      'process.env.PUSHER_APP_CLUSTER': JSON.stringify(env.PUSHER_APP_CLUSTER),
+      'process.env.PUSHER_APP_ID': JSON.stringify(env.PUSHER_APP_ID),
+      'process.env.PUSHER_APP_SECRET': JSON.stringify(env.PUSHER_APP_SECRET),
+      'process.env.WS_DRIVER': JSON.stringify(env.WS_DRIVER),
     },
     plugins: [react()],
     server: {

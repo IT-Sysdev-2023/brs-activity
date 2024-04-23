@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-src/ws.tsx
+/src/ws.tsx
 
 node_modules
 dist
