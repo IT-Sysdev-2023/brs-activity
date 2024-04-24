@@ -32,7 +32,7 @@ const UsersActivityTable: React.FC<{
               Users
             </h5>
           </div>
-          {columns.map((item) => (
+          {columns?.map((item) => (
             <div className="p-2.5 text-center xl:p-5" key={item}>
               <h5 className="text-sm font-medium uppercase xsm:text-base">
                 {item}
@@ -41,7 +41,7 @@ const UsersActivityTable: React.FC<{
           ))}
         </div>
 
-        {data.map((item) => (
+        {data?.map((item) => (
           <div
             className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5"
             key={item.id}
