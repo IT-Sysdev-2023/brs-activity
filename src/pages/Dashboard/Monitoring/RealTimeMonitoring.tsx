@@ -5,6 +5,7 @@ import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 import { useWsOnlineUsers } from '../../Helper';
+import ReconciliationHistoryChart from '../../../components/Dashboard/ReconciliationHistoryChart';
 
 interface UserProgress {
   a: number;
@@ -14,11 +15,14 @@ interface UserProgress {
 
 const RealTimeMonitoring: React.FC = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<UserProgress[]>([]);
-  const [userProgressReconciliation, setUserProgressReconciliation] = useState<UserProgress[]>(
-    [],
-  );
-  const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
-  
+  const [userProgressReconciliation, setUserProgressReconciliation] = useState<
+    UserProgress[]
+  >([]);
+  const [reconciliationHistory, setReconciliationHistory] = useState<{
+    column: string[];
+    data: any;
+  }>({ column: [], data: [] });
+
   useWsOnlineUsers();
 
   useEffect(() => {
@@ -33,19 +37,17 @@ const RealTimeMonitoring: React.FC = () => {
           setUserProgressDtr((prevProgress) => {
             const index = prevProgress.findIndex((item) => item.a === userId);
             if (index !== -1) {
-              // Create a copy of the previous progress array
               const updatedProgress = [...prevProgress];
-              // Update the percentage value of the object with the specified ID
               updatedProgress[index] = {
                 ...updatedProgress[index],
                 y: percentage,
               };
-              // Return the updated array
               return updatedProgress;
-
             } else {
-              // Add a new object to the progress array
-              return [...prevProgress, { a: userId, x: username, y: percentage }];
+              return [
+                ...prevProgress,
+                { a: userId, x: username, y: percentage },
+              ];
             }
           });
         },
@@ -73,7 +75,6 @@ const RealTimeMonitoring: React.FC = () => {
 
               // Return the updated array
               return updatedProgress;
-
             } else {
               // Add a new object to the progress array
               return [...prevProgress, { a: id, x: username, y: percentage }];
@@ -84,12 +85,11 @@ const RealTimeMonitoring: React.FC = () => {
     };
 
     const usersLog = async () => {
-      const res = await axios.get('users-log');
-      setLog(res.data);
+      const res = await axios.get('reconciliation-history');
+      setReconciliationHistory(res.data);
     };
 
     usersLog();
-
     reconciliationListen();
     uploadingDtrListen();
   }, []);
@@ -106,7 +106,11 @@ const RealTimeMonitoring: React.FC = () => {
             name="Reconciliation Monitoring Statistics"
           />
         </div>
-        <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
+        <ReconciliationHistoryChart
+          title="Reconciliation History"
+          data={reconciliationHistory.data}
+          columns={reconciliationHistory.column}
+        />
       </div>
     </>
   );
