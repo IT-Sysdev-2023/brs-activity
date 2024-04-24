@@ -28,7 +28,6 @@ function BankAccountMonitoring() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [bankAccount, setBankAccount] = useState<any[]>([]); //List of Bank Accounts in options
-  //Select OPtions
   const [loading, setLoading] = useState(false);
 
   const dispatch = useAppDispatch();

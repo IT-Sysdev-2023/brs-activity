@@ -2,8 +2,6 @@
 import axios from './http/axios';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js/worker';
-// import dotenv from 'dotenv';
-// dotenv.config();
 
 declare global {
   interface Window {

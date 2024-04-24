@@ -3,7 +3,6 @@ import axios from '../../../http/axios';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
-import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 import { useWsOnlineUsers } from '../../Helper';
 import ReconciliationHistoryChart from '../../../components/Dashboard/ReconciliationHistoryChart';
 
