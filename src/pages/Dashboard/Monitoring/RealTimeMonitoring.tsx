@@ -3,14 +3,13 @@ import axios from '../../../http/axios';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable';
 import { useWsOnlineUsers } from '../../Helper';
 
 interface UserProgress {
-  a: number; // Assuming `id` is of type string
-  x: string; // Assuming `username` is of type string
-  y: number; // Assuming `percentage` is of type number
+  a: number;
+  x: string;
+  y: number;
 }
 
 const RealTimeMonitoring: React.FC = () => {
@@ -72,10 +71,6 @@ const RealTimeMonitoring: React.FC = () => {
                 y: percentage,
               };
 
-              // if(percentage === 100){
-              //   ws.leave(`admin-bdo-reconciling.${id}.${bankAccount}`);
-              // }
-
               // Return the updated array
               return updatedProgress;
 
@@ -90,7 +85,6 @@ const RealTimeMonitoring: React.FC = () => {
 
     const usersLog = async () => {
       const res = await axios.get('users-log');
-      // console.log(res.data);
       setLog(res.data);
     };
 
@@ -113,11 +107,6 @@ const RealTimeMonitoring: React.FC = () => {
           />
         </div>
         <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
-        {/* <div className="col-span-12 xl:col-span-8"> */}
-        {/* <UsersActivityTable title="Users Authentication Log" data={log} /> */}
-        {/* </div> */}
-        {/* <OnlineUsersCard title='Online Users' /> */}
-        {/* <SampleChart/> */}
       </div>
     </>
   );

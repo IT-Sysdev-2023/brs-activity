@@ -12,7 +12,7 @@ import { updateSeries } from '../../../app/features/charts/ChartSeriesSlice';
 import AreaNullChart from '../../../components/Dashboard/AreaNullChart';
 import AreaChartDot from '../../../components/Dashboard/AreaChartDot';
 import ColumnChart from '../../../components/Dashboard/ColumnChart';
-import { useParams } from 'react-router-dom';
+
 
 function BankAccountMonitoring() {
   const [areaChartRecord, setAreaChartRecord] = useState<{
