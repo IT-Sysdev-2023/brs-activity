@@ -18,10 +18,12 @@ const ChatCard:React.FC<{onlineUsers: any[]}> = ({onlineUsers}) => {
           to="/"
           className="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4"
         >
-          <div className="relative h-14 w-14 ">
-            <img src={`${process.env.APP_URL}/storage/user_images/${item.id}`} alt="User" className='rounded-full' />
-            <span className="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-          </div>
+          <div className="relative">
+                <div className="w-14 h-14 rounded-full overflow-hidden">
+                <img src={`${process.env.APP_URL}/storage/user_images/${item.id}`} alt={item.id} className='w-full h-full object-cover' />
+                <span className="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
+                </div>
+            </div>
 
           <div className="flex flex-1 items-center justify-between">
             <div>

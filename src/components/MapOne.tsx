@@ -2,12 +2,24 @@ import jsVectorMap from 'jsvectormap';
 import 'jsvectormap/dist/css/jsvectormap.css';
 import { useEffect } from 'react';
 import '../js/us-aea-en';
+import '../js/world';
 
 const MapOne = () => {
   useEffect(() => {
     const mapOne = new jsVectorMap({
+      markers: [
+        { name: 'Philippines', coords: [12.8797, 121.7740] },
+      ],
+      selectedMarkers: [0],
+      labels: {
+        markers: {
+          render(marker: any, index: any) {
+            return marker.name || marker.labelName || 'Not available'
+          }
+        }
+      },
       selector: '#mapOne',
-      map: 'us_aea_en',
+      map: 'world',
       zoomButtons: true,
 
       regionStyle: {
@@ -30,13 +42,13 @@ const MapOne = () => {
         },
       },
 
-      labels: {
-        regions: {
-          render(code) {
-            return code.split('-')[1];
-          },
-        },
-      },
+      // labels: {
+      //   regions: {
+      //     render(code: any) {
+      //       return code.split('-')[1];
+      //     },
+      //   },
+      // },
     });
   });
 
