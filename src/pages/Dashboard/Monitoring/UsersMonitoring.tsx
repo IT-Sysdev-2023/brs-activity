@@ -3,12 +3,8 @@ import Breadcrumb from '../../../components/Breadcrumb.tsx';
 import VisitorsChart from '../../../components/Dashboard/VisitorsMonitoringChart.tsx';
 import axios from '../../../http/axios.tsx';
 import UsersActivityTable from '../../../components/Dashboard/UsersActivityTable.tsx';
+import { fetchedDataType } from '../../../types/index.ts';
 
-interface fetchedDataType {
-  users: number[];
-  date: number[];
-  month: string;
-}
 
 const UsersMonitoring = () => {
   const [active, setActive] = useState(true);

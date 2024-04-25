@@ -149,7 +149,6 @@ function BankAccountMonitoring() {
             data={areaChartRecord}
             yearData={areaData}
           />
-          {/* <AreaChart data={areaChartRecord} name={'Bank Accounts Balance'} /> */}
         </div>
         <div className="col-span-6 justify-center space-y-10 ">
           <AreaChartDot
