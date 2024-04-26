@@ -45,8 +45,3 @@ export interface ChartTwoStateType {
     data: number[];
   }[];
 }
-
-export interface ColumnDataTypes {
-  column: [];
-  data: [];
-}

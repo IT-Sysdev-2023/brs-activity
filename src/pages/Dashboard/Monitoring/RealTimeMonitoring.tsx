@@ -5,12 +5,12 @@ import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import { useWsOnlineUsers } from '../../Helper';
 import ReconciliationHistoryChart from '../../../components/Dashboard/ReconciliationHistoryChart';
-import { ColumnDataTypes, DataPoint } from '../../../types';
+import { ChartTypes, DataPoint } from '../../../types';
 
 const RealTimeMonitoring = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<DataPoint[]>([]);
   const [userProgressReconciliation, setUserProgressReconciliation] = useState<DataPoint[]>([]);
-  const [reconciliationHistory, setReconciliationHistory] = useState<ColumnDataTypes>({ column: [], data: [] });
+  const [reconciliationHistory, setReconciliationHistory] = useState<ChartTypes>({ columns: [], data: [] });
 
   useWsOnlineUsers();
   useEffect(() => {
@@ -97,7 +97,7 @@ const RealTimeMonitoring = () => {
         <ReconciliationHistoryChart
           title="Reconciliation History"
           data={reconciliationHistory.data}
-          columns={reconciliationHistory.column}
+          columns={reconciliationHistory.columns}
         />
       </div>
     </>
