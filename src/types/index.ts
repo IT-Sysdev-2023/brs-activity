@@ -18,7 +18,7 @@ export interface TypeProps {
 
 export interface ColumnChartsTypes {
   name?: string;
-  data?: {[key:string]: any};
+  data?: { [key: string]: any };
   yearData: any;
 }
 
@@ -36,7 +36,7 @@ export interface VisitorsMonitoringCharts {
 }
 
 export interface NumberPairTypes {
-  [index: string] : number
+  [index: string]: number;
 }
 
 export interface ChartTwoStateType {
@@ -44,4 +44,9 @@ export interface ChartTwoStateType {
     name: string;
     data: number[];
   }[];
+}
+
+export interface ColumnDataTypes {
+  column: [];
+  data: [];
 }

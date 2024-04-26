@@ -5,20 +5,14 @@ import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import { useWsOnlineUsers } from '../../Helper';
 import ReconciliationHistoryChart from '../../../components/Dashboard/ReconciliationHistoryChart';
-import { DataPoint } from '../../../types';
+import { ColumnDataTypes, DataPoint } from '../../../types';
 
 const RealTimeMonitoring = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<DataPoint[]>([]);
-  const [userProgressReconciliation, setUserProgressReconciliation] = useState<
-    DataPoint[]
-  >([]);
-  const [reconciliationHistory, setReconciliationHistory] = useState<{
-    column: string[];
-    data: any;
-  }>({ column: [], data: [] });
+  const [userProgressReconciliation, setUserProgressReconciliation] = useState<DataPoint[]>([]);
+  const [reconciliationHistory, setReconciliationHistory] = useState<ColumnDataTypes>({ column: [], data: [] });
 
   useWsOnlineUsers();
-
   useEffect(() => {
     const uploadingDtrListen = () => {
       ws.private('admin-dtr-uploading').listen(
