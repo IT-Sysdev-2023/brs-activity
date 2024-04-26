@@ -6,7 +6,7 @@ import chartOneOptions from '../../../components/componentsOptions/ChartOneOptio
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { updateSeries } from '../../../app/features/charts/ChartSeriesSlice';
 
-const ChartOne: React.FC = () => {
+const ChartOne = () => {
   const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
   const [bankAccount, setBankAccount] = useState<any[]>([]); //List of Bank Accounts in options
   const [chartOptions, setChartOptions] = useState(chartOneOptions()); //Chart Options

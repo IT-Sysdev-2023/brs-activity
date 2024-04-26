@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { ReconciliationTypesCharts } from '../../types';
+import { ChartTypes } from '../../types';
 
-const ReconciliationHistoryChart: React.FC<ReconciliationTypesCharts> = ({
+const ReconciliationHistoryChart: React.FC<ChartTypes> = ({
   title,
   data,
   columns,

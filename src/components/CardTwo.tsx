@@ -1,17 +1,14 @@
 import axios from '../http/axios';
 import { useEffect, useState } from 'react';
 import PercentageChange from './PercentageChange';
+import { NumberPairTypes } from '../types';
 
-const CardTwo:React.FC = () => {
-  const [bankAccount, setBankAccount] = useState<{
-    dtrInactive: number;
-    dtrInactiveChanges: number;
-  }>({ dtrInactive: 0, dtrInactiveChanges: 0 });
+const CardTwo = () => {
+  const [bankAccount, setBankAccount] = useState<NumberPairTypes>({ dtrInactive: 0, dtrInactiveChanges: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('/inactive-bank-account');
-
+      const response = await axios.get('/inactive-bank-account'); 
       setBankAccount(response.data);
     };
     fetchData();

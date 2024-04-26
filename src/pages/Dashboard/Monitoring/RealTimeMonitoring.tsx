@@ -12,7 +12,7 @@ interface UserProgress {
   y: number;
 }
 
-const RealTimeMonitoring: React.FC = () => {
+const RealTimeMonitoring = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<UserProgress[]>([]);
   const [userProgressReconciliation, setUserProgressReconciliation] = useState<
     UserProgress[]

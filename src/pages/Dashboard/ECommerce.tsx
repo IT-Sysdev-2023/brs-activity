@@ -19,7 +19,7 @@ import axios from '../../http/axios.tsx';
 import chartOneOptions from '../../components/componentsOptions/ChartOneOptions.tsx';
 import { updateSeries } from '../../app/features/charts/ChartSeriesSlice.ts';
 
-const ECommerce: React.FC = () => {
+const ECommerce = () => {
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers);
   const stateSeries = useAppSelector((state) => state.chartSeries.series);

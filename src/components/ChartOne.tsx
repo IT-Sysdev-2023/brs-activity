@@ -1,12 +1,12 @@
 import axios from '../http/axios';
 import { Select } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import chartOneOptions from './componentsOptions/ChartOneOptions';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { updateSeries } from '../app/features/charts/ChartSeriesSlice';
 
-const ChartOne: React.FC = () => {
+const ChartOne  = () => {
   const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
   const [bankAccount, setBankAccount] = useState<any[]>([]); //List of Bank Accounts in options
   const [chartOptions, setChartOptions] = useState(chartOneOptions()); //Chart Options
@@ -38,7 +38,6 @@ const ChartOne: React.FC = () => {
           index: 0,
           name: 'No. of Bank Accounts',
           data: res.data.map((item: any) => item.bank_accounts_count),
-          // color: '#10B981',
         }),
       );
     };

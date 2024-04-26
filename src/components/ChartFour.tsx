@@ -6,8 +6,9 @@ interface ChartFourState {
   series: { data: number[] }[];
 }
 
-const ChartFour: React.FC = () => {
-  const [state, setState] = useState<ChartFourState>({
+const ChartFour = () => {
+
+  const state:ChartFourState = {
     series: [
       {
         data: [
@@ -17,7 +18,7 @@ const ChartFour: React.FC = () => {
         ],
       },
     ],
-  });
+  };
 
   const options: ApexOptions = {
     colors: ['#3C50E0'],
@@ -33,7 +34,6 @@ const ChartFour: React.FC = () => {
       bar: {
         horizontal: false,
         columnWidth: '55%',
-        // endingShape: "rounded",
         borderRadius: 2,
       },
     },
@@ -95,9 +95,6 @@ const ChartFour: React.FC = () => {
         radius: 99,
       },
     },
-    // yaxis: {
-    //   title: false,
-    // },
     grid: {
       yaxis: {
         lines: {
@@ -113,11 +110,6 @@ const ChartFour: React.FC = () => {
       x: {
         show: false,
       },
-      // y: {
-      //   formatter: function (val) {
-      //     return val;
-      //   },
-      // },
     },
   };
 

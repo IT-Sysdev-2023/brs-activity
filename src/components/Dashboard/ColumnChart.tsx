@@ -7,8 +7,8 @@ const ColumnChart: React.FC<ColumnChartsTypes> = ({ name, data, yearData }) => {
     {
       name: 'Transactions',
       data:
-        Object.keys(data).length > 0
-          ? [...data[yearData.firstYear], ...(data[yearData.secondYear] ?? [])]
+        data !== undefined && Object.keys(data)?.length > 0
+          ? [...(data[yearData.firstYear] ?? []), ...(data[yearData.secondYear] ?? [])]
           : [],
     },
   ];
@@ -28,15 +28,15 @@ const ColumnChart: React.FC<ColumnChartsTypes> = ({ name, data, yearData }) => {
         },
         groups: [
           {
-            title: Object.keys(data).length > 0 ? yearData.firstYear : '',
+            title: data !== undefined && Object.keys(data).length > 0 ? yearData.firstYear : '',
             cols:
-              Object.keys(data).length > 0
+            data !== undefined &&  Object.keys(data).length > 0
                 ? data[yearData.firstYear]?.length
                 : 0,
           },
           {
             title: yearData?.secondYear ?? '',
-            cols: data[yearData?.secondYear]?.length ?? 0,
+            cols: (data !== undefined && data[yearData?.secondYear]?.length) ?? 0,
           },
         ],
       },

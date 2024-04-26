@@ -5,8 +5,8 @@ import { NumberPairTypes } from '../types/index.js';
 
 const CardFour = () => {
   const [data, setData] = useState<NumberPairTypes>({
-    firstNumber: 0,
-    secondNumber: 0,
+    totalUsers : 0,
+    percent: 0,
   });
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const CardFour = () => {
       <div className="mt-4 flex items-end justify-between">
         <div>
           <h4 className="text-title-md font-bold text-black dark:text-white">
-            {data.firstNumber !== 0 ? (
-              <pre>{JSON.stringify(data.firstNumber, null, 2)}</pre>
+            {data.totalUsers  !== 0 ? (
+              <pre>{JSON.stringify(data.totalUsers , null, 2)}</pre>
             ) : (
               <p>Loading...</p>
             )}
@@ -56,7 +56,7 @@ const CardFour = () => {
           <span className="text-sm font-medium">Total Users</span>
         </div>
 
-        <PercentageChange percent={data.secondNumber} />
+        <PercentageChange percent={data.percent} />
       </div>
     </div>
   );

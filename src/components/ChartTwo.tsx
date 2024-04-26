@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from '../http/axios';
 import chartTwoOptions from './componentsOptions/ChartTwoOptions';
+import { ChartTwoStateType } from '../types';
 
-interface ChartTwoState {
-  series: {
-    name: string;
-    data: number[];
-  }[];
-}
 
-const ChartTwo: React.FC = () => {
+const ChartTwo = () => {
+
   const [selectWeek, setSelectWeek] = useState('current');
   const [apexOptions, setApexOptions] = useState(chartTwoOptions());
-  const [state, setState] = useState<ChartTwoState>({
+  const [state, setState] = useState<ChartTwoStateType>({
     series: [
       {
         name: 'Current Week Users ',
@@ -54,8 +50,6 @@ const ChartTwo: React.FC = () => {
           categories: res?.data.current.map((item: any) => item.date)
         },
       });
-
-   
     };
 
     fetchUser();

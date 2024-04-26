@@ -17,22 +17,15 @@ export interface TypeProps {
 
 export interface ColumnChartsTypes {
   name?: string;
-  data?: any;
+  data?: {[key:string]: any};
   yearData: any;
 }
 
-export interface ReconciliationTypesCharts {
+export interface ChartTypes {
   title?: string;
   data: any[];
   columns: string[];
 }
-
-export interface UsersActivityCharts {
-  title?: string;
-  data: any[];
-  columns: string[];
-}
-
 export interface VisitorsMonitoringCharts {
   countUser: number[];
   dayOfTheMonth: number[];
@@ -42,16 +35,12 @@ export interface VisitorsMonitoringCharts {
 }
 
 export interface NumberPairTypes {
-  firstNumber: number;
-  secondNumber: number;
+  [index: string] : number
 }
 
-export interface CardFourTypes {
-  totalUsers: number;
-  percent: number;
-}
-
-export interface BankAccountsTypes {
-  activeBankAccounts: number;
-  activeBankAccountChanges: number;
+export interface ChartTwoStateType {
+  series: {
+    name: string;
+    data: number[];
+  }[];
 }
