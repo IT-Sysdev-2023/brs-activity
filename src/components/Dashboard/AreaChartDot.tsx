@@ -1,10 +1,5 @@
 import ReactApexChart from 'react-apexcharts';
-
-interface TypeProps {
-  name?: string;
-  series: any;
-  option: { [key: string]: any };
-}
+import { TypeProps } from '../../types';
 
 const AreaChartDot: React.FC<TypeProps> = ({
   option,

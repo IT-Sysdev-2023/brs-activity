@@ -2,7 +2,7 @@ import axios from '../http/axios';
 import { useEffect, useState } from 'react';
 import PercentageChange from './PercentageChange';
 
-const CardTwo = () => {
+const CardTwo:React.FC = () => {
   const [bankAccount, setBankAccount] = useState<{
     dtrInactive: number;
     dtrInactiveChanges: number;

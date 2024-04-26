@@ -4,13 +4,11 @@ import {
   duration,
   isLoggedInOrOut,
 } from '../../pages/Helper';
+import { UsersActivityCharts } from '../../types';
 
-const UsersActivityTable: React.FC<{
-  title?: string;
-  data: any[];
-  columns: string[];
-}> = ({ title, data, columns }) => {
+const UsersActivityTable: React.FC<UsersActivityCharts> = ({ title, data, columns }) => {
   const useOnlineUsers = defaultOnlineUsers();
+  
   const date = dayjs().format('MMM D, YYYY');
 
   const formatDate = (date: string) => {

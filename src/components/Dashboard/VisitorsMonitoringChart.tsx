@@ -1,26 +1,18 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { VisitorsMonitoringCharts } from '../../types';
 
-interface ChartFourState {
-  series: { data: number[]; name: any }[];
-}
-interface TypeProps {
-  countUser: number[];
-  dayOfTheMonth: number[];
-  month: string;
-  toggleMonth: (isCurrentMonth: boolean) => void;
-  isCurrentMonth: boolean;
-}
-
-const VisitorsChart: React.FC<TypeProps> = ({
+const VisitorsChart: React.FC<VisitorsMonitoringCharts> = ({
   countUser,
   dayOfTheMonth,
   month,
   toggleMonth,
   isCurrentMonth,
 }) => {
-  const [state, setState] = useState<ChartFourState>({
+  const [state, setState] = useState<{
+    series: { data: number[]; name: any }[];
+  }>({
     series: [
       {
         name: 'label',

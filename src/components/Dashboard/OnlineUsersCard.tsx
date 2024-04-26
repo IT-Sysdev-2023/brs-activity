@@ -1,17 +1,7 @@
 import { Link } from 'react-router-dom';
-import UserOne from '../../images/user/user-01.png';
-import UserTwo from '../../images/user/user-02.png';
-import UserThree from '../../images/user/user-03.png';
-import UserFour from '../../images/user/user-04.png';
-import UserFive from '../../images/user/user-05.png';
-import { useAppSelector } from '../../app/hooks';
 import { defaultOnlineUsers, duration } from '../../pages/Helper';
-// import UserFiv2e from '../../images/user/user-05.png';
 
-interface OnlineUsersInterface {
-  title?: string;
-}
-const OnlineUsersCard: React.FC<OnlineUsersInterface> = ({ title }) => {
+const OnlineUsersCard: React.FC<{title?: string;}> = ({ title }) => {
   const useOnlineUsers = defaultOnlineUsers();
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">

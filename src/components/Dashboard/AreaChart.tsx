@@ -1,10 +1,7 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-interface DataPoint {
-  x: string;
-  y: number;
-}
+import { DataPoint } from '../../types';
 
 interface TypeProps {
   name: string;

@@ -1,11 +1,8 @@
 import { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
+import { ColumnChartsTypes } from '../../types';
 
-const ColumnChart: React.FC<{ name?: string; data?: any; yearData: any }> = ({
-  name,
-  data,
-  yearData,
-}) => {
+const ColumnChart: React.FC<ColumnChartsTypes> = ({ name, data, yearData }) => {
   const series = [
     {
       name: 'Transactions',

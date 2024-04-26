@@ -1,25 +1,23 @@
 import dayjs from 'dayjs';
+import { ReconciliationTypesCharts } from '../../types';
 
-const ReconciliationHistoryChart: React.FC<{
-  title?: string;
-  data: any[];
-  columns: string[];
-}> = ({ title, data, columns }) => {
-
-    const formatDate = (date: string) => {
-        return dayjs(date).format('MMM D, YYYY')
-    };
-    const formatMonthYear = (date: string) => {
-        
-        return dayjs(date, 'MM-YYYY').format('MMM YYYY')
-    };
+const ReconciliationHistoryChart: React.FC<ReconciliationTypesCharts> = ({
+  title,
+  data,
+  columns,
+}) => {
+  const formatDate = (date: string) => {
+    return dayjs(date).format('MMM D, YYYY');
+  };
+  const formatMonthYear = (date: string) => {
+    return dayjs(date, 'MM-YYYY').format('MMM YYYY');
+  };
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="flex justify-between ">
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
           {title} ({data?.length})
         </h4>
-        {/* <h4 className="font-semibold">{date}</h4> */}
       </div>
 
       <div className="flex flex-col">
@@ -54,21 +52,15 @@ const ReconciliationHistoryChart: React.FC<{
                 </div>
               </div>
               <p className="hidden text-black dark:text-white sm:block">
-                {
-                  item.causer.name
-                }
+                {item.causer.name}
               </p>
             </div>
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">
-                {item.description}
-              </p>
+              <p className="text-black dark:text-white">{item.description}</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-5">
-                {item.bank_account.title}
-              </p>
+              <p className="text-meta-5">{item.bank_account.title}</p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
@@ -76,12 +68,11 @@ const ReconciliationHistoryChart: React.FC<{
                 {formatMonthYear(item.properties.month)}
               </p>
             </div>
-             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white">
                 {formatDate(item.created_at)}
               </p>
             </div>
-            
           </div>
         ))}
       </div>

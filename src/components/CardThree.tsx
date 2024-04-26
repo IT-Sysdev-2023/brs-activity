@@ -1,17 +1,14 @@
 import axios from '../http/axios';
 import { useEffect, useState } from 'react';
 import PercentageChange from './PercentageChange';
+import { BankAccountsTypes } from '../types';
 
-const CardThree = () => {
-  const [bankAccounts, setBankAccount] = useState<{
-    activeBankAccounts: number;
-    activeBankAccountChanges: number;
-  }>({ activeBankAccounts: 0, activeBankAccountChanges: 0 });
+const CardThree:React.FC = () => {
+  const [bankAccounts, setBankAccount] = useState<BankAccountsTypes>({ activeBankAccounts: 0, activeBankAccountChanges: 0 });
 
   useEffect(() => {
     const total = async () => {
       const response = await axios.get('/bank-account-total');
-
       setBankAccount(response.data);
     };
 

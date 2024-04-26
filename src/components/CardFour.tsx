@@ -1,19 +1,20 @@
 import axios from '../http/axios.js';
 import { useEffect, useState } from 'react';
 import PercentageChange from './PercentageChange.js';
+import { NumberPairTypes } from '../types/index.js';
 
 const CardFour = () => {
-  const [data, setData] = useState<{ totalUsers: number, percent: number }>({ totalUsers: 0, percent: 0 });
+  const [data, setData] = useState<NumberPairTypes>({
+    firstNumber: 0,
+    secondNumber: 0,
+  });
 
   useEffect(() => {
     const fetchedData = async () => {
-      try {
-        const response = await axios.get('/total-users');
-        setData(response.data);
-      } catch (error) {
-        console.log('Error :', error);
-      }
+      const response = await axios.get('/total-users');
+      setData(response.data);
     };
+
     fetchedData();
   }, []);
 
@@ -46,8 +47,8 @@ const CardFour = () => {
       <div className="mt-4 flex items-end justify-between">
         <div>
           <h4 className="text-title-md font-bold text-black dark:text-white">
-            {data.totalUsers !== 0 ? (
-              <pre>{JSON.stringify(data.totalUsers, null, 2)}</pre>
+            {data.firstNumber !== 0 ? (
+              <pre>{JSON.stringify(data.firstNumber, null, 2)}</pre>
             ) : (
               <p>Loading...</p>
             )}
@@ -55,7 +56,7 @@ const CardFour = () => {
           <span className="text-sm font-medium">Total Users</span>
         </div>
 
-        <PercentageChange percent={data.percent}/>
+        <PercentageChange percent={data.secondNumber} />
       </div>
     </div>
   );
