@@ -5,17 +5,12 @@ import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import { useWsOnlineUsers } from '../../Helper';
 import ReconciliationHistoryChart from '../../../components/Dashboard/ReconciliationHistoryChart';
-
-interface UserProgress {
-  a: number;
-  x: string;
-  y: number;
-}
+import { DataPoint } from '../../../types';
 
 const RealTimeMonitoring = () => {
-  const [userProgressDtr, setUserProgressDtr] = useState<UserProgress[]>([]);
+  const [userProgressDtr, setUserProgressDtr] = useState<DataPoint[]>([]);
   const [userProgressReconciliation, setUserProgressReconciliation] = useState<
-    UserProgress[]
+    DataPoint[]
   >([]);
   const [reconciliationHistory, setReconciliationHistory] = useState<{
     column: string[];

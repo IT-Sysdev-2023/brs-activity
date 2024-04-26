@@ -20,6 +20,7 @@ import chartOneOptions from '../../components/componentsOptions/ChartOneOptions.
 import { updateSeries } from '../../app/features/charts/ChartSeriesSlice.ts';
 
 const ECommerce = () => {
+
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers);
   const stateSeries = useAppSelector((state) => state.chartSeries.series);
@@ -29,6 +30,7 @@ const ECommerce = () => {
   const [chartOptions, setChartOptions] = useState(chartOneOptions());
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         ws.join('online.users')
@@ -40,10 +42,6 @@ const ECommerce = () => {
       }
     };
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const usersStat = async () => {
       const res = await axios.get('/visitors-monthly', {
         params: { current: true },
@@ -65,7 +63,10 @@ const ECommerce = () => {
         }),
       );
     };
+
     usersStat();
+
+    fetchData();
   }, []);
 
   return (

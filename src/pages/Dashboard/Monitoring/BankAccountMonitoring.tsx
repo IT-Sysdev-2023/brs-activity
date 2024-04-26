@@ -14,11 +14,10 @@ import AreaChartDot from '../../../components/Dashboard/AreaChartDot';
 import ColumnChart from '../../../components/Dashboard/ColumnChart';
 
 
-function BankAccountMonitoring() {
-  const [areaChartRecord, setAreaChartRecord] = useState<{
-    [key: string]: any;
-  }>([]);
+const BankAccountMonitoring = () => {
 
+
+  const [areaChartRecord, setAreaChartRecord] = useState([]);
   const [data, setData] = useState([]);
   const [chartOptions, setChartOptions] = useState(chartOneOptions());
   const [areaData, setAreaData] = useState<{
@@ -162,4 +161,4 @@ function BankAccountMonitoring() {
   );
 }
 
-export default BankAccountMonitoring;
+export default BankAccountMonitoring
