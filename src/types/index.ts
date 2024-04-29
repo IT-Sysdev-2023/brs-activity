@@ -26,6 +26,7 @@ export interface ChartTypes {
   title?: string;
   data: any[];
   columns: string[];
+  filterRecord?: React.ChangeEventHandler<HTMLSelectElement>
 }
 export interface VisitorsMonitoringCharts {
   countUser: number[];

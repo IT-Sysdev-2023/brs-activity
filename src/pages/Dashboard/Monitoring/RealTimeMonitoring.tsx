@@ -81,6 +81,10 @@ const RealTimeMonitoring = () => {
     reconciliationListen();
     uploadingDtrListen();
   }, []);
+
+  const filterRecord =(e:any) => {
+    console.log(e.target.value);
+  }
   return (
     <>
       <Breadcrumb pageName="Real-Time Monitoring Statistics" />
@@ -95,6 +99,7 @@ const RealTimeMonitoring = () => {
           />
         </div>
         <ReconciliationHistoryChart
+        filterRecord={filterRecord}
           title="Reconciliation History"
           data={reconciliationHistory.data}
           columns={reconciliationHistory.columns}
