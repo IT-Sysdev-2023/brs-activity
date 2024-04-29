@@ -8,16 +8,8 @@ const CardOne: React.FC<{onlineUsers: any[]}> = ({onlineUsers}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-
-      try {
-
         const res = await axios.get('online-percentage-change');
         setChanges(res.data);
-
-      } catch (error) {
-
-           console.error('Error fetching data:', error);
-     }
     };
 
     fetchData();

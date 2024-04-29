@@ -14,13 +14,6 @@ const AreaNullChart: React.FC<{name:string, series: any}> = ({ name = 'Name', se
         enabled: false,
       },
     },
-    // dataLabels: {
-    //   enabled: false,
-    //   formatter: function (val) {
-    //     return val.toLocaleString();
-    //   }
-    // },
-  
     stroke: {
       curve: 'straight',
     },

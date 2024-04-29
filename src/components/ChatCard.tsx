@@ -37,9 +37,6 @@ const ChatCard:React.FC<{onlineUsers: any[]}> = ({onlineUsers}) => {
                 <span className="text-xs"> - {duration(item.logged_in_at)}</span>
               </p>
             </div>
-            {/* <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-              <span className="text-sm font-medium text-white">3</span>
-            </div> */}
           </div>
         </Link>
         ))}

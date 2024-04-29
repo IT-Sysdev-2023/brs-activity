@@ -7,7 +7,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { updateSeries } from '../app/features/charts/ChartSeriesSlice';
 
 const ChartOne  = () => {
-  const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
+  // const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
   const [bankAccount, setBankAccount] = useState<any[]>([]); //List of Bank Accounts in options
   const [chartOptions, setChartOptions] = useState(chartOneOptions()); //Chart Options
   const [record, setRecord] = useState<{ [key: string]: any }>({});
@@ -64,8 +64,6 @@ const ChartOne  = () => {
   }, [currentPage]);
 
   const onChange = async (value: string) => {
-    // console.log(`selected ${value}`);
-    setSelectedBankAccount(value);
 
     const res = await axios.get(`bank-account-activity/${value}`);
 
