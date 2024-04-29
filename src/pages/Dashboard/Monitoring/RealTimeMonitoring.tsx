@@ -9,10 +9,14 @@ import { ChartTypes, DataPoint } from '../../../types';
 
 const RealTimeMonitoring = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<DataPoint[]>([]);
-  const [userProgressReconciliation, setUserProgressReconciliation] = useState<DataPoint[]>([]);
-  const [reconciliationHistory, setReconciliationHistory] = useState<ChartTypes>({ columns: [], data: [] });
-
+  const [userProgressReconciliation, setUserProgressReconciliation] = useState<
+    DataPoint[]
+  >([]);
+  const [reconciliationHistory, setReconciliationHistory] =
+    useState<ChartTypes>({ columns: [], data: [] });
+  const [isFiltered, setFiltered] = useState(true);
   useWsOnlineUsers();
+
   useEffect(() => {
     const uploadingDtrListen = () => {
       ws.private('admin-dtr-uploading').listen(
@@ -71,20 +75,30 @@ const RealTimeMonitoring = () => {
         },
       );
     };
-
-    const usersLog = async () => {
-      const res = await axios.get('reconciliation-history');
-      setReconciliationHistory(res.data);
-    };
-
-    usersLog();
     reconciliationListen();
     uploadingDtrListen();
   }, []);
 
-  const filterRecord =(e:any) => {
-    console.log(e.target.value);
-  }
+  useEffect(() => {
+    const reconciliationHistory = async () => {
+      const res = await axios.get('reconciliation-history', {
+        params: {
+          filter: isFiltered,
+        },
+      });
+      setReconciliationHistory(res.data);
+    };
+
+    reconciliationHistory();
+  }, [isFiltered]);
+
+  const filterRecord = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === 'yearly') {
+      setFiltered(false);
+    } else {
+      setFiltered(true);
+    }
+  };
   return (
     <>
       <Breadcrumb pageName="Real-Time Monitoring Statistics" />
@@ -99,7 +113,7 @@ const RealTimeMonitoring = () => {
           />
         </div>
         <ReconciliationHistoryChart
-        filterRecord={filterRecord}
+          filterRecord={filterRecord}
           title="Reconciliation History"
           data={reconciliationHistory.data}
           columns={reconciliationHistory.columns}

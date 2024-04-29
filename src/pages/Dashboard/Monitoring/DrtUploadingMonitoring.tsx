@@ -6,8 +6,8 @@ import chartOneOptions from '../../../components/componentsOptions/ChartOneOptio
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { updateSeries } from '../../../app/features/charts/ChartSeriesSlice';
 
-const ChartOne = () => {
-  const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
+const DtrUploadingMonitoring = () => {
+  // const [selectBankAccount, setSelectedBankAccount] = useState('bankAccounts'); //Options
   const [bankAccount, setBankAccount] = useState<any[]>([]); //List of Bank Accounts in options
   const [chartOptions, setChartOptions] = useState(chartOneOptions()); //Chart Options
   const [record, setRecord] = useState<{ [key: string]: any }>({});
@@ -66,8 +66,7 @@ const ChartOne = () => {
   }, [currentPage]);
 
   const onChange = async (value: string) => {
-    // console.log(`selected ${value}`);
-    setSelectedBankAccount(value);
+    // setSelectedBankAccount(value);
 
     const res = await axios.get(`bank-account-activity/${value}`);
 
@@ -131,23 +130,7 @@ const ChartOne = () => {
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          {/* <div className="mt-2">
-            <select
-              id="bank"
-              name="bank"
-              value={selectBankAccount}
-              onChange={onUserChange}
-              className="bg-white pl-3 block w-44 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-              <option value="bankAccounts">Select Bank Account</option>
-              {bankAccount?.map((item: any) => (
-                <option key={item.id} value={item.id}>
-                  {item.name} - {item.account_no}
-                </option>
-              ))}
-              <option value="loadMore">...load more</option>
-            </select>
-          </div> */}
+          
           <Select
             dropdownStyle={{ width: '400px' }}
             showSearch
@@ -224,4 +207,4 @@ const ChartOne = () => {
   );
 };
 
-export default ChartOne;
+export default DtrUploadingMonitoring;

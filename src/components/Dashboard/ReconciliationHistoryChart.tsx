@@ -10,9 +10,9 @@ const ReconciliationHistoryChart: React.FC<ChartTypes> = ({
   const formatDate = (date: string) => {
     return dayjs(date).format('MMM D, YYYY');
   };
-  const formatMonthYear = (date: string) => {
-    return dayjs(date, 'MM-YYYY').format('MMM YYYY');
-  };
+  // const formatMonthYear = (date: string) => {
+  //   return dayjs(date, 'MM-YYYY').format('MMM YYYY');
+  // };
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       {/* <div className="mb-3 justify-between gap-4 sm:flex"></div> */}
