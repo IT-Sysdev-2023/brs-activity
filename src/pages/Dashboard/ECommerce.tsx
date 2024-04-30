@@ -18,12 +18,14 @@ import AreaChartDot from '../../components/Dashboard/AreaChartDot.tsx';
 import axios from '../../http/axios.tsx';
 import chartOneOptions from '../../components/componentsOptions/ChartOneOptions.tsx';
 import { updateSeries } from '../../app/features/charts/ChartSeriesSlice.ts';
+import UsersActivityTable from '../../components/Dashboard/UsersActivityTable.tsx';
 
 const ECommerce = () => {
 
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers);
   const stateSeries = useAppSelector((state) => state.chartSeries.series);
+  const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
 
   const [month, setMonth] = useState('');
 
@@ -64,6 +66,14 @@ const ECommerce = () => {
       );
     };
 
+    const usersLog = async () => {
+      const res = await axios.get('users-log');
+      setLog(res.data);
+    };
+
+    
+    usersLog();
+
     usersStat();
 
     fetchData();
@@ -87,11 +97,12 @@ const ECommerce = () => {
           name={`Daily Active Users - as of ${month}`}
         />
         <ChatCard onlineUsers={defaultValue} />
-        <ChartThree />
+        <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
+        {/* <ChartThree />
         <MapOne />
         <div className="col-span-12 xl:col-span-8">
           <TableOne />
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -25,10 +25,15 @@ const coreRoutes = [
     component: UsersMonitoring,
   },
   {
-    path: '/realtime-monitoring',
+    path: '/realtime-monitoring/dtr-monitoring',
     title: 'Real-Time Monitoring',
     component: RealtimeMonitoring,
   },
+  // {
+  //   path: '/realtime-monitoring/reconciliation-monitoring',
+  //   title: 'Real-Time Monitoring',
+  //   component: RealtimeMonitoring,
+  // },
   {
     path: '/bank-account-monitoring',
     title: 'Bank Account Monitoring',
