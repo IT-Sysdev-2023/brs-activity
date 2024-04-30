@@ -198,7 +198,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Bank Account Monitoring
                             </NavLink>
                           </li>
-                          <li>
+                        
                             <SidebarLinkGroup
                               activeCondition={
                                 pathname === '/realtime-monitoring' ||
@@ -216,6 +216,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                         'text-bodydark1 dark:bg-meta-4'
                                       }`}
                                       onClick={(e) => {
+                                        // console.log(pathname.includes('realtime-monitoring'))
                                         e.preventDefault();
                                         sidebarExpanded
                                           ? handleClick()
@@ -262,7 +263,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                         </li>
                                         <li>
                                           <NavLink
-                                            to="/realtime-monitoring/reconciliation-monitoring"
+                                            to="/realtime-monitoring/dtr-monitoring"
                                             className={({ isActive }) =>
                                               'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                               (isActive && '!text-white')
@@ -278,7 +279,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 );
                               }}
                             </SidebarLinkGroup>
-                          </li>
+                          
                           <li>
                             <NavLink
                               to="/users-monitoring"

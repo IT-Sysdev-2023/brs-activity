@@ -101,8 +101,9 @@ const DropdownMessage = () => {
 
         <ul className="flex h-auto flex-col overflow-y-auto">
           {usersMessages?.map((item:any) => (
-              <li>
+              <li  key={item.id}>
               <Link
+               
                 className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
                 to="/messages"
               >
