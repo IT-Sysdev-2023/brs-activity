@@ -3,7 +3,8 @@ import { lazy } from 'react';
 const Calendar = lazy(() => import('../pages/Calendar'));
 const UsersMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/UsersMonitoring'));
 const BankAccountMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/BankAccountMonitoring'));
-const RealtimeMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealTimeMonitoring'));
+const RealtimeDtrMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealtimeDtrMonitoring'));
+const RealtimeMatchingMonitoring = lazy(() => import('../pages/Dashboard/Monitoring/RealtimeMatchingMonitoring'));
 const Chart = lazy(() => import('../pages/Chart'));
 const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const FormLayout = lazy(() => import('../pages/Form/FormLayout'));
@@ -27,13 +28,13 @@ const coreRoutes = [
   {
     path: '/realtime-monitoring/dtr-monitoring',
     title: 'Real-Time Monitoring',
-    component: RealtimeMonitoring,
+    component: RealtimeDtrMonitoring,
   },
-  // {
-  //   path: '/realtime-monitoring/reconciliation-monitoring',
-  //   title: 'Real-Time Monitoring',
-  //   component: RealtimeMonitoring,
-  // },
+  {
+    path: '/realtime-monitoring/reconciliation-monitoring',
+    title: 'Real-Time Monitoring',
+    component: RealtimeMatchingMonitoring,
+  },
   {
     path: '/bank-account-monitoring',
     title: 'Bank Account Monitoring',
