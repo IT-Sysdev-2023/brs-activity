@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserTwo from '../images/user/user-02.png';
+import axios from '../http/axios';
+import { duration } from '../pages/Helper';
 
 const DropdownMessage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [usersMessages, setUsersMessages] = useState<any>([]);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -23,6 +26,16 @@ const DropdownMessage = () => {
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
   });
+  useEffect(() =>{
+
+    const messages = async() =>{
+        const res = await axios.get('/user-messages');
+        setUsersMessages(res.data);
+    }
+    
+    messages();
+
+},[])
 
   // close if the esc key is pressed
   useEffect(() => {
@@ -87,24 +100,28 @@ const DropdownMessage = () => {
         </div>
 
         <ul className="flex h-auto flex-col overflow-y-auto">
-          <li>
-            <Link
-              className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="/messages"
-            >
-              <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserTwo} alt="User" />
-              </div>
-
-              <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Mariya Desoja
-                </h6>
-                <p className="text-sm">I like your confidence 💪</p>
-                <p className="text-xs">2min ago</p>
-              </div>
-            </Link>
-          </li>
+          {usersMessages?.map((item:any) => (
+              <li>
+              <Link
+                className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                to="/messages"
+              >
+                <div className="h-12.5 w-12.5 rounded-full">
+                  <img src={`${process.env.APP_URL + '/storage/user_images/' + item.user_id}`} alt="User" className='rounded-full'/>
+                </div>
+  
+                <div>
+                  <h6 className="text-sm font-medium text-black dark:text-white">
+                    {item.details?.employee_name}
+                  </h6>
+                  <p className="text-sm">{item.message[item.message.length - 1].message}</p>
+                  <p className="text-xs">{duration(item.message[item.message.length - 1].created_at)}</p>
+                  {/* <p className="text-xs">2min ago</p> */}
+                </div>
+              </Link>
+            </li>
+          ))}
+          
         </ul>
       </div>
       {/* <!-- Dropdown End --> */}

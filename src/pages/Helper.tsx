@@ -39,16 +39,26 @@ export function duration(timeIn: string, timeOut?: string | undefined) {
   // Convert the difference to a human-readable format
   const duration = dayjs.duration(timeDifference);
 
-  // Get the time spent in hours, minutes, and seconds
+  const years = duration.years();
+  const months = duration.months();
+  const days = duration.days();
   const hours = duration.hours();
   const minutes = duration.minutes();
   const seconds = duration.seconds();
 
-  return hours === 0
-    ? `${minutes} min, ${seconds} sec.`
-    : minutes === 0 && hours === 0
-      ? `${seconds} seconds.`
-      : `${hours} hrs, ${minutes} min, ${seconds} sec.`;
+  if (years > 0) {
+    return `${months} years, ${months} months, ${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec.`;
+  } else if (months > 0) {
+    return `${months} days, ${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec.`;
+  } else if (days > 0) {
+    return `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec.`;
+  } else if (hours > 0) {
+    return `${hours} hrs, ${minutes} min, ${seconds} sec.`;
+  } else if (minutes > 0) {
+    return `${minutes} min, ${seconds} sec.`;
+  } else {
+    return `${seconds} sec.`;
+  }
 }
 
 export const defaultOnlineUsers = () => {
