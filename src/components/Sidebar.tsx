@@ -116,7 +116,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/' ||
                             pathname.includes('dashboard')) &&
-                          'bg-bodydark1 dark:bg-meta-4'
+                          'text-bodydark1 dark:bg-meta-4'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -210,13 +210,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                   <React.Fragment>
                                     <NavLink
                                       to="#"
-                                      className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-bodydark1 dark:hover:bg-meta-4 ${
+                                      className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:text-bodydark1 dark:hover:bg-meta-4 ${
                                         (pathname === '/realtime-monitoring' ||
                                           pathname.includes('realtime-monitoring')) &&
                                         'text-bodydark1 dark:bg-meta-4'
                                       }`}
                                       onClick={(e) => {
-                                        // console.log(pathname.includes('realtime-monitoring'))
                                         e.preventDefault();
                                         sidebarExpanded
                                           ? handleClick()

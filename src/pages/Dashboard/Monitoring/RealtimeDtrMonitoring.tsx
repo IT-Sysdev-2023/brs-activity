@@ -15,6 +15,8 @@ const RealtimeDtrMonitoring = () => {
   const [reconciliationHistory, setReconciliationHistory] =
     useState<ChartTypes>({ columns: [], data: [] });
   const [isFiltered, setFiltered] = useState(true);
+  const [page, setPage] = useState(2);
+
   useWsOnlineUsers();
 
   useEffect(() => {
@@ -81,7 +83,7 @@ const RealtimeDtrMonitoring = () => {
 
   useEffect(() => {
     const reconciliationHistory = async () => {
-      const res = await axios.get('reconciliation-history', {
+      const res = await axios.get(`reconciliation-history?page=${page}`, {
         params: {
           filter: isFiltered,
         },
@@ -89,8 +91,9 @@ const RealtimeDtrMonitoring = () => {
       setReconciliationHistory(res.data);
     };
 
+
     reconciliationHistory();
-  }, [isFiltered]);
+  }, [isFiltered, page]);
 
   const filterRecord = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === 'yearly') {
@@ -99,6 +102,17 @@ const RealtimeDtrMonitoring = () => {
       setFiltered(true);
     }
   };
+
+  const changePage = (page : number | string) => {
+    
+    if(page === 'prev'){
+      setPage(prev => prev - 1);
+    }else if(page === 'next'){
+      setPage(prev => prev + 1);
+    }else{
+      setPage(Number(page))
+    }
+  }
   return (
     <>
       <Breadcrumb pageName="Real-Time Monitoring Statistics" />
@@ -117,6 +131,7 @@ const RealtimeDtrMonitoring = () => {
           title="Reconciliation History"
           data={reconciliationHistory.data}
           columns={reconciliationHistory.columns}
+          onChangePage={changePage}
         />
       </div>
     </>

@@ -112,12 +112,12 @@ const RealTimeMonitoring = () => {
             name="Reconciliation Monitoring Statistics"
           />
         </div>
-        <ReconciliationHistoryChart
+        {/* <ReconciliationHistoryChart
           filterRecord={filterRecord}
           title="Reconciliation History"
           data={reconciliationHistory.data}
           columns={reconciliationHistory.columns}
-        />
+        /> */}
       </div>
     </>
   );
