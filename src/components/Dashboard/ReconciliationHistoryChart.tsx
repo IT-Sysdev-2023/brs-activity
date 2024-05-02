@@ -114,14 +114,20 @@ const ReconciliationHistoryChart: React.FC<{
       <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
         <div className="flex flex-1 justify-between sm:hidden">
           <a
-            href="#"
-            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            onClick={(e) => {
+              e.preventDefault();
+              onChangePage('prev');
+            }}
+            className={`${!data.prev_page_url && 'pointer-events-none' } cursor-pointer relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
           >
             Previous
           </a>
           <a
-            href="#"
-            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          onClick={(e) => {
+            e.preventDefault();
+            onChangePage('next');
+          }}
+            className={`${!data.next_page_url && 'pointer-events-none' }cursor-pointer relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
           >
             Next
           </a>
@@ -154,7 +160,7 @@ const ReconciliationHistoryChart: React.FC<{
                         e.preventDefault();
                         onChangePage('prev');
                       }}
-                      className={`${(item.active || !item.url) && 'pointer-events-none text-stroke'} cursor-pointer hover:bg-secondary hover:text-white relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+                      className={`${!data.prev_page_url && 'pointer-events-none text-stroke'} cursor-pointer hover:bg-secondary hover:text-white relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
                     >
                       <span className="sr-only">Previous</span>
                       <svg
@@ -190,7 +196,7 @@ const ReconciliationHistoryChart: React.FC<{
                         e.preventDefault();
                         onChangePage('next');
                       }}
-                      className={`${(item.active || !item.url) && 'pointer-events-none text-stroke'} cursor-pointer hover:bg-secondary hover:text-white relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+                      className={`${!data.next_page_url && 'pointer-events-none text-stroke'} cursor-pointer hover:bg-secondary hover:text-white relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
                     >
                       <span className="sr-only">Next</span>
                       <svg
