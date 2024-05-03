@@ -28,6 +28,7 @@ const ECommerce = () => {
   const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
 
   const [month, setMonth] = useState('');
+  const [record, setRecord] = useState({});
 
   const [chartOptions, setChartOptions] = useState(chartOneOptions());
 
@@ -67,8 +68,16 @@ const ECommerce = () => {
     };
 
     const usersLog = async () => {
-      const res = await axios.get('users-log');
-      setLog(res.data);
+      try{
+
+        const res = await axios.get('users-log');
+        setLog(res.data);
+          const transData = Object.groupBy(res.data.data?.data, ({user_id}) => user_id);
+          
+          setRecord(transData);
+      }catch(e){
+        console.log(e);
+      }
     };
 
     
@@ -78,6 +87,10 @@ const ECommerce = () => {
 
     fetchData();
   }, []);
+
+  const onPageChange = () => {
+    
+  }
 
   return (
     <>
@@ -97,7 +110,7 @@ const ECommerce = () => {
           name={`Daily Active Users - as of ${month}`}
         />
         <ChatCard onlineUsers={defaultValue} />
-        <UsersActivityTable title="Users Authentication Log" data={log.data} columns={log.column} />
+        <UsersActivityTable onChangePage={onPageChange} title="Users Authentication Log" data={log.data} columns={log.column} record={record} />
         {/* <ChartThree />
         <MapOne />
         <div className="col-span-12 xl:col-span-8">
