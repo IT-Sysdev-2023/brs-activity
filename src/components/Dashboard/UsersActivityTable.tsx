@@ -10,13 +10,17 @@ const UsersActivityTable: React.FC<{
   title?: string;
   data: any;
   columns: string[];
-  record: any;
   onChangePage: Function;
   filterRecord?: React.ChangeEventHandler<HTMLSelectElement>;
-}> = ({ title, data, columns, onChangePage, record }) => {
+}> = ({ title, data, columns, onChangePage }) => {
   const useOnlineUsers = defaultOnlineUsers();
-  console.log(record);
+  
   const date = dayjs().format('MMM D, YYYY');
+
+  const count = (arrayOfObjects: any[]) => {
+    const res = _.uniqBy(arrayOfObjects, 'user_id');
+    return res.length;
+  };
 
   const formatDate = (date: string) => {
     return dayjs(date).format('h:mm A');
@@ -25,9 +29,9 @@ const UsersActivityTable: React.FC<{
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="flex justify-between ">
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-          {title} ({Object.keys(record)?.length})
+          {title} ({count(data.data)})
         </h4>
-        <h4 className="font-semibold">{date}</h4>
+        {/* <h4 className="font-semibold">{date}</h4> */}
       </div>
 
       <div className="flex flex-col">
@@ -45,78 +49,6 @@ const UsersActivityTable: React.FC<{
             </div>
           ))}
         </div>
-
-        {/* {Object.keys(record).length !== 0 && Object.keys(record).map(item => (
-          <p key={record[item][0].id}>{record[item][0].action}</p>
-        ))} */}
-        {/* {Object.keys(record).length !== 0 && Object.keys(record).map((item: any) => (
-          <div
-            className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5"
-            key={record[item][0].id}
-          >
-            <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <div className="relative">
-                <div className="w-14 h-14 rounded-full overflow-hidden">
-                  <img
-                    src={`${process.env.APP_URL}/storage/user_images/${item}`}
-                    alt={item}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {useOnlineUsers.some((onlineId) => onlineId.id === record[item][0].details?.details?.id) && (
-                  <div
-                    className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white"
-                    style={{ backgroundColor: '#21d973' }}
-                  ></div>
-                )}
-              </div>
-              <p className="hidden text-black dark:text-white sm:block">
-                {
-                  record[item][0].details?.details?.employee_name
-                }
-              </p>
-            </div>
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">
-                {record[item][0].ip[0]}
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-5">
-                {formatDate(record[item][0].created_at)} 
-              </p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">
-                {duration(
-                  record[item][0].created_at,
-                  record[item][1]?.created_at,
-                )}
-              </p>
-            </div>
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p
-                className={`${
-                  isLoggedInOrOut(
-                    record[item][0].created_at,
-                    record[item][1].created_at,
-                  )
-                    ? 'text-meta-3'
-                    : 'text-meta-1'
-                }`}
-              >
-                {isLoggedInOrOut(
-                  record[item][0].created_at,
-                  record[item][1].created_at,
-                )
-                  ? 'Logged In'
-                  : 'logged Out'}
-              </p>
-            </div>
-          </div>
-        ))} */}
         {data.data?.map((item: any) => (
           <div
             className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5"
@@ -131,7 +63,9 @@ const UsersActivityTable: React.FC<{
                     className="w-full h-full object-cover"
                   />
                 </div>
-                {useOnlineUsers.some((onlineId) => onlineId.id === item.user_id) && (
+                {useOnlineUsers.some(
+                  (onlineId) => onlineId.id === item.user_id,
+                ) && (
                   <div
                     className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white"
                     style={{ backgroundColor: '#21d973' }}
@@ -139,50 +73,25 @@ const UsersActivityTable: React.FC<{
                 )}
               </div>
               <p className="hidden text-black dark:text-white sm:block">
-                {
-                 item.details?.details?.employee_name
-                }
+                {item.details?.details?.employee_name}
               </p>
             </div>
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">
-                {item.ip[0]}
-              </p>
+              <p className="text-black dark:text-white">{item.ip[0]}</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-5">
-                {formatDate(record.created_at)} 
-              </p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">
-                {/* {duration(
-                  record[item][0].created_at,
-                  record[item][1]?.created_at,
-                )} */}
-              </p>
+              <p className="text-meta-5">{formatDate(item.created_at)}</p>
             </div>
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className={`${item.action === 'logged_out' ? 'text-meta-1': 'text-meta-3'}`}>{item.action}</p>
-              {/* <p
-                className={`${
-                  isLoggedInOrOut(
-                    record[item][0].created_at,
-                    record[item][1].created_at,
-                  )
-                    ? 'text-meta-3'
-                    : 'text-meta-1'
-                }`}
+              <p className="text-black dark:text-white">{date}</p>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p
+                className={`${item.action === 'logged_out' ? 'text-meta-1' : 'text-meta-3'}`}
               >
-                {isLoggedInOrOut(
-                  record[item][0].created_at,
-                  record[item][1].created_at,
-                )
-                  ? 'Logged In'
-                  : 'logged Out'}
-              </p> */}
+                {item.action}
+              </p>
             </div>
           </div>
         ))}
