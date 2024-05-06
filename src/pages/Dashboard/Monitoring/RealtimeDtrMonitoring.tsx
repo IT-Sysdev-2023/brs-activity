@@ -4,14 +4,13 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import ws from '../../../ws';
 import BarChart from '../../../components/Dashboard/BarChart';
 import { useWsOnlineUsers } from '../../Helper';
-import ReconciliationHistoryChart from '../../../components/Dashboard/Realtime Monitoring/ReconciliationHistoryChart';
 import { ChartTypes, DataPoint } from '../../../types';
+import DtrUploadingHistoryChart from '../../../components/Dashboard/Realtime Monitoring/DtrUploadingHistoryChart';
 
 const RealtimeDtrMonitoring = () => {
   const [userProgressDtr, setUserProgressDtr] = useState<DataPoint[]>([]);
-  const [reconciliationHistory, setReconciliationHistory] =
+  const [dtrHistory, setDtrUploadingHistory] =
     useState<ChartTypes>({ columns: [], data: [] });
-  const [isFiltered, setFiltered] = useState(true);
   const [page, setPage] = useState(1);
 
   useWsOnlineUsers();
@@ -48,25 +47,13 @@ const RealtimeDtrMonitoring = () => {
   }, []);
 
   useEffect(() => {
-    const reconciliationHistory = async () => {
-      const res = await axios.get(`reconciliation-history?page=${page}`, {
-        params: {
-          filter: isFiltered,
-        },
-      });
-      setReconciliationHistory(res.data);
+    const dtrUploadingHistory = async () => {
+      const res = await axios.get(`dtr-uploading-history?page=${page}`);
+      setDtrUploadingHistory(res.data);
     };
 
-    reconciliationHistory();
-  }, [isFiltered, page]);
-
-  const filterRecord = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === 'yearly') {
-      setFiltered(false);
-    } else {
-      setFiltered(true);
-    }
-  };
+    dtrUploadingHistory();
+  }, [page]);
 
   const changePage = (page: number | string) => {
     if (page === 'prev') {
@@ -84,11 +71,10 @@ const RealtimeDtrMonitoring = () => {
         <div className="col-span-12 space-y-10 ">
           <BarChart data={userProgressDtr} name="DTR Uploading" />
         </div>
-        <ReconciliationHistoryChart
-          filterRecord={filterRecord}
-          title="Reconciliation History"
-          data={reconciliationHistory.data}
-          columns={reconciliationHistory.columns}
+        <DtrUploadingHistoryChart
+          title="DTR Uploading History"
+          data={dtrHistory.data}
+          columns={dtrHistory.columns}
           onChangePage={changePage}
         />
       </div>
