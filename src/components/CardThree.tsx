@@ -4,7 +4,10 @@ import PercentageChange from './PercentageChange';
 import { NumberPairTypes } from '../types';
 
 const CardThree = () => {
-  const [bankAccounts, setBankAccount] = useState<NumberPairTypes>({ activeBankAccounts: 0, activeBankAccountChanges: 0 });
+  const [bankAccounts, setBankAccount] = useState<NumberPairTypes>({
+    activeBankAccounts: 0,
+    activeBankAccountChanges: 0,
+  });
 
   useEffect(() => {
     const total = async () => {
@@ -18,7 +21,7 @@ const CardThree = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
-        <svg
+        {/* <svg
           className="fill-primary dark:fill-white"
           width="22"
           height="22"
@@ -34,6 +37,31 @@ const CardThree = () => {
             d="M14.3345 5.29375C13.922 5.39688 13.647 5.80938 13.7501 6.22188C13.7845 6.42813 13.8189 6.63438 13.8189 6.80625C13.8189 8.35313 12.547 9.625 11.0001 9.625C9.45327 9.625 8.1814 8.35313 8.1814 6.80625C8.1814 6.6 8.21577 6.42813 8.25015 6.22188C8.35327 5.80938 8.07827 5.39688 7.66577 5.29375C7.25327 5.19063 6.84077 5.46563 6.73765 5.87813C6.6689 6.1875 6.63452 6.49688 6.63452 6.80625C6.63452 9.2125 8.5939 11.1719 11.0001 11.1719C13.4064 11.1719 15.3658 9.2125 15.3658 6.80625C15.3658 6.49688 15.3314 6.1875 15.2626 5.87813C15.1595 5.46563 14.747 5.225 14.3345 5.29375Z"
             fill=""
           />
+        </svg> */}
+
+        <svg
+          width="24px"
+          height="24px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            {' '}
+            <path
+              d="M3 21.0001H21M4 18.0001H20M6 18.0001V13.0001M10 18.0001V13.0001M14 18.0001V13.0001M18 18.0001V13.0001M12 7.00695L12.0074 7.00022M21 10.0001L14.126 3.88986C13.3737 3.2212 12.9976 2.88688 12.5732 2.75991C12.1992 2.64806 11.8008 2.64806 11.4268 2.75991C11.0024 2.88688 10.6263 3.2212 9.87404 3.88986L3 10.0001H21Z"
+              stroke="#3C50E0"
+              stroke-width="1.224"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>{' '}
+          </g>
         </svg>
       </div>
 
