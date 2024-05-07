@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import Breadcrumb from '../components/Breadcrumb';
 import axios from '../http/axios';
-import dayjs from 'dayjs';
 
 const Calendar = () => {
   const [day, setDay] = useState<{
     month: string;
     days: number[];
-    holiday: { [key: string]: any };
-  }>({ month: '', days: [], holiday: {} });
+  }>({ month: '', days: [] });
 
   useEffect(() => {
     const calendarDays = async () => {
       const res = await axios.get('calendar');
-      // console.log(res.data);
       setDay(res.data);
     };
 
@@ -23,7 +20,8 @@ const Calendar = () => {
     <>
       <Breadcrumb pageName="Calendar" />
 
-      <span className="text-6xl">{day.month}</span>
+      <span className="text-5xl">{day.month}</span>
+
       {/* <!-- ====== Calendar Section Start ====== --> */}
       <div className="w-full max-w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark mt-10">
         <table className="w-full">
@@ -60,15 +58,14 @@ const Calendar = () => {
             </tr>
           </thead>
           <tbody>
-            {/* <!-- Line 1 --> */}
             {day.days?.map((item: any, key: any) => (
               <tr className="grid grid-cols-7" key={key}>
                 {item.map((day: { day: number; holiday: string, isCurrent: boolean }) => (
                   <td
                     key={day.day}
-                    className={` ${day.isCurrent && 'bg-meta-5'} ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31`}
+                    className={` ${day.isCurrent && 'bg-meta-2'} ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31`}
                   >
-                    <span className={`${day.isCurrent && 'text-white'} font-medium text-black dark:text-white`}>
+                    <span className={`${day.isCurrent && 'text-meta-5'} font-medium text-black dark:text-white`}>
                       {day.day}
                     </span>
 
@@ -94,7 +91,6 @@ const Calendar = () => {
           </tbody>
         </table>
       </div>
-      {/* <!-- ====== Calendar Section End ====== --> */}
     </>
   );
 };
