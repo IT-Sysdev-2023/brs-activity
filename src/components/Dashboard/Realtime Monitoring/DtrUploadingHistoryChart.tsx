@@ -1,12 +1,8 @@
 import dayjs from 'dayjs';
+import { DtrUploadingHistoryTypes } from '../../../types';
 
-const DtrUploadingHistoryChart: React.FC<{
-  title?: string;
-  data: { [key: string]: any };
-  columns: string[];
-  onChangePage: Function;
-}> = ({ title, data, columns, onChangePage }) => {
-  
+const DtrUploadingHistoryChart: React.FC<DtrUploadingHistoryTypes> = ({ title, data, columns, onChangePage }) => {
+
   const formatDate = (date: string) => {
     return dayjs(date).format('MMM D, YYYY');
   };

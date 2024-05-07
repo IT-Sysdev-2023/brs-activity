@@ -46,3 +46,10 @@ export interface ChartTwoStateType {
     data: number[];
   }[];
 }
+
+export interface DtrUploadingHistoryTypes{
+  title?: string;
+  data: { [key: string]: any };
+  columns: string[];
+  onChangePage: Function;
+}
