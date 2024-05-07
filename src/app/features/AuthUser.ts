@@ -5,12 +5,14 @@ interface authUserTypes {
   id: number;
   name: string;
   roles: {[key:string]: any};
+  details:  {[key:string]: any};
 }
 
 const initialState: authUserTypes = {
   id: 0,
   name: '',
   roles: [],
+  details: []
 };
 
 const hasRole = (roles: string[]) => { //r'fr'b2rf'r'b2r2

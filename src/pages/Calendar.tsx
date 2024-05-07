@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Breadcrumb from '../components/Breadcrumb';
 import axios from '../http/axios';
+import dayjs from 'dayjs';
 
 const Calendar = () => {
   const [day, setDay] = useState<{
@@ -62,14 +63,16 @@ const Calendar = () => {
             {/* <!-- Line 1 --> */}
             {day.days?.map((item: any, key: any) => (
               <tr className="grid grid-cols-7" key={key}>
-                {item.map((day: { day: number; holiday: string }) => (
+                {item.map((day: { day: number; holiday: string, isCurrent: boolean }) => (
                   <td
                     key={day.day}
-                    className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31"
+                    className={` ${day.isCurrent && 'bg-meta-5'} ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31`}
                   >
-                    <span className="font-medium text-black dark:text-white">
+                    <span className={`${day.isCurrent && 'text-white'} font-medium text-black dark:text-white`}>
                       {day.day}
                     </span>
+
+
                     {day.holiday && (<div className="group h-16 w-full flex-grow cursor-pointer py-1 md:h-30">
                       <span className="group-hover:text-primary md:hidden">
                         More
