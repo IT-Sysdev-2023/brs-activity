@@ -4,10 +4,7 @@ import CardFour from '../../components/CardFour.tsx';
 import CardOne from '../../components/CardOne.tsx';
 import CardThree from '../../components/CardThree.tsx';
 import CardTwo from '../../components/CardTwo.tsx';
-import ChartThree from '../../components/ChartThree.tsx';
 import ChatCard from '../../components/ChatCard.tsx';
-import MapOne from '../../components/MapOne.tsx';
-import TableOne from '../../components/TableOne.tsx';
 import {
   addOnlineUser,
   removeOnlineUser,
@@ -21,14 +18,12 @@ import { updateSeries } from '../../app/features/charts/ChartSeriesSlice.ts';
 import UsersActivityTable from '../../components/Dashboard/UsersActivityTable.tsx';
 
 const ECommerce = () => {
-
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.onlineUsers.onlineUsers);
   const stateSeries = useAppSelector((state) => state.chartSeries.series);
   const [log, setLog] = useState<{column: string[], data: any}>({column: [], data: []});
-
   const [month, setMonth] = useState('');
-  // const [record, setRecord] = useState({});
+  const [page, setPage] = useState(1);
 
   const [chartOptions, setChartOptions] = useState(chartOneOptions());
 
@@ -49,7 +44,9 @@ const ECommerce = () => {
       const res = await axios.get('/visitors-monthly', {
         params: { current: true },
       });
+      
       setMonth(res.data?.month);
+
       setChartOptions({
         ...chartOptions,
         xaxis: {
@@ -68,26 +65,25 @@ const ECommerce = () => {
     };
 
     const usersLog = async () => {
-      try{
-
-        const res = await axios.get('users-log');
+        const res = await axios.get(`users-log?page=${page}`);
         setLog(res.data);
-      }catch(e){
-        console.log(e);
-      }
+     
     };
-
     
     usersLog();
-
     usersStat();
-
     fetchData();
   }, []);
 
-  const onPageChange = () => {
-    
-  }
+  const onPageChange = (page: number | string) => {
+    if (page === 'prev') {
+      setPage((prev) => prev - 1);
+    } else if (page === 'next') {
+      setPage((prev) => prev + 1);
+    } else {
+      setPage(Number(page));
+    }
+  };
 
   return (
     <>

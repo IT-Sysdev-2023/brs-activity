@@ -1,18 +1,11 @@
 import dayjs from 'dayjs';
 import {
-  defaultOnlineUsers,
-  duration,
-  isLoggedInOrOut,
+  defaultOnlineUsers
 } from '../../pages/Helper';
 import _ from 'lodash';
+import { UsersActivityTypes } from '../../types';
 
-const UsersActivityTable: React.FC<{
-  title?: string;
-  data: any;
-  columns: string[];
-  onChangePage: Function;
-  filterRecord?: React.ChangeEventHandler<HTMLSelectElement>;
-}> = ({ title, data, columns, onChangePage }) => {
+const UsersActivityTable: React.FC<UsersActivityTypes> = ({ title, data, columns, onChangePage }) => {
   const useOnlineUsers = defaultOnlineUsers();
   
   const date = dayjs().format('MMM D, YYYY');

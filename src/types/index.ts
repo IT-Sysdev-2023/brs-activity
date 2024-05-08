@@ -22,11 +22,19 @@ export interface ColumnChartsTypes {
   yearData: any;
 }
 
-export interface ChartTypes {
+export interface defaultTypes{
   title?: string;
-  data: any[];
   columns: string[];
   filterRecord?: React.ChangeEventHandler<HTMLSelectElement>
+}
+
+export interface ChartTypes extends defaultTypes{
+  data: any[];
+}
+
+export interface UsersActivityTypes extends defaultTypes{
+  data: any;
+  onChangePage: Function;
 }
 export interface VisitorsMonitoringCharts {
   countUser: number[];
