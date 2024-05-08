@@ -44,7 +44,7 @@ const ECommerce = () => {
       const res = await axios.get('/visitors-monthly', {
         params: { current: true },
       });
-      
+
       setMonth(res.data?.month);
 
       setChartOptions({
@@ -64,16 +64,19 @@ const ECommerce = () => {
       );
     };
 
-    const usersLog = async () => {
-        const res = await axios.get(`users-log?page=${page}`);
-        setLog(res.data);
-     
-    };
-    
-    usersLog();
+  
     usersStat();
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const usersLog = async () => {
+      const res = await axios.get(`users-log?page=${page}`);
+      setLog(res.data);
+  };
+  
+  usersLog();
+  },[page])
 
   const onPageChange = (page: number | string) => {
     if (page === 'prev') {

@@ -280,7 +280,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             }}
                           </SidebarLinkGroup>
 
-                          <li>
+                          {/* <li>
                             <NavLink
                               to="/users-monitoring"
                               className={({ isActive }) =>
@@ -290,7 +290,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             >
                               Users Monitoring
                             </NavLink>
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
