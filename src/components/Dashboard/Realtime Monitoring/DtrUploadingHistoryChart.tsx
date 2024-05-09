@@ -4,7 +4,7 @@ import { DtrUploadingHistoryTypes } from '../../../types';
 const DtrUploadingHistoryChart: React.FC<DtrUploadingHistoryTypes> = ({ title, data, columns, onChangePage }) => {
 
   const formatDate = (date: string) => {
-    return dayjs(date).format('MMM D, YYYY');
+    return dayjs(date).format('MMM D, YYYY h:mm A');
   };
 
   return (
